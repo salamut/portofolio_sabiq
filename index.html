@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+
+<html class="light lenis" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sabiq Muttaqin - Robotics &amp; Electrical Engineer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js" type="module"></script>
+<!-- Scripts for Animations & Interactions -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#94ccff",
+                        "surface-bright": "#faf8ff",
+                        "primary": "#003594",
+                        "on-background": "#191b23",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "secondary-fixed": "#cde5ff",
+                        "on-surface-variant": "#434654",
+                        "outline": "#737685",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#6e2700",
+                        "on-primary-container": "#b8c8ff",
+                        "outline-muted": "#737686",
+                        "ocean-deep": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004b74",
+                        "secondary": "#016398",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#faf8ff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "inverse-surface": "#2e3039",
+                        "outline-variant": "#c3c6d6",
+                        "surface-container-high": "#e7e7f3",
+                        "tertiary-container": "#943700",
+                        "inverse-primary": "#b4c5ff",
+                        "on-secondary-container": "#00517e",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3fe",
+                        "surface-tint": "#1b55d0",
+                        "tertiary-fixed": "#ffdbcd",
+                        "background": "#faf8ff",
+                        "surface-container-highest": "#e1e1ed",
+                        "glass-nav": "rgba(229, 231, 235, 0.9)",
+                        "on-secondary-fixed": "#001d32",
+                        "primary-container": "#004ac6",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d9d9e4",
+                        "surface-dark": "#000000",
+                        "secondary-container": "#81c4ff",
+                        "on-surface": "#191b23",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-variant": "#e1e1ed",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-tertiary-container": "#ffba9d",
+                        "surface-container": "#ededf8",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#dbe1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-padding-mobile": "64px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "section-padding-desktop": "120px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+        }
+        #custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(0, 74, 198, 0.5);
+            border: 2px solid #004ac6;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            will-change: width, height, transform;
+        }
+        #custom-cursor.hovering {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(0, 74, 198, 0.2);
+        }
+        
+        /* Sharpen Images */
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+
+        /* SplitText Lines */
+        .line {
+            overflow: hidden;
+            padding-bottom: 0.1em; /* Prevent descender cropping */
+        }
+        .word {
+            display: inline-block;
+        }
+
+        /* Glassmorphic Tech Frames Brackets */
+        .tech-frame {
+            position: relative;
+        }
+        .tech-frame::before, .tech-frame::after,
+        .tech-frame-inner::before, .tech-frame-inner::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-color: rgba(0, 74, 198, 0.8);
+            border-style: solid;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .tech-frame::before {
+            top: 0; left: 0;
+            border-width: 2px 0 0 2px;
+            border-top-left-radius: 12px;
+        }
+        .tech-frame::after {
+            top: 0; right: 0;
+            border-width: 2px 2px 0 0;
+            border-top-right-radius: 12px;
+        }
+        .tech-frame-inner::before {
+            bottom: 0; left: 0;
+            border-width: 0 0 2px 2px;
+            border-bottom-left-radius: 12px;
+        }
+        .tech-frame-inner::after {
+            bottom: 0; right: 0;
+            border-width: 0 2px 2px 0;
+            border-bottom-right-radius: 12px;
+        }
+
+        /* Arrow hover effect */
+        .arrow-hover-group:hover .arrow-icon {
+            transform: translate(4px, -4px)
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease
+        }
+        ::-webkit-scrollbar {
+            width: 8px
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05)
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #004ac6;
+            border-radius: 999px;
+            border: 2px solid transparent;
+            background-clip: padding-box
+        }
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03
+        }
+        .cyber-grid {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuADYnVpBVM6zYBq4tA8OgfYB3gjp-iSdM8nKDVV5DyLtFabgCmetptr1LF8mUlq4-05ar_1TZ5lfiUtROktRi57awr0Q6YLtfwOOYEIcs3PgdooGg88rPgKDSbvqH6DZS3UE-47XWMAP30ZrMeVf8yJfe--gfe7hw57-tBpB1en_Rj6bzFha53xJksIsn_t4RRUQfanubnWxiPtffS6rWQTIt-wF8lx3FxKLk8btEInSL-lAPe6MgHrzQ);
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease
+        }
+        .cyber-grid.active {
+            opacity: 0.15
+        }
+        .cyber-grid-fallback {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 95%, rgba(0, 255, 102, 0.1) 95%), linear-gradient(90deg, transparent 95%, rgba(0, 255, 102, 0.1) 95%);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotatex(60deg);
+            transform-origin: bottom;
+            pointer-events: none
+        }
+        .terminal-output p {
+            margin: 0;
+            padding: 2px 0
+        }
+        .terminal-output .cmd {
+            color: #0F6
+        }
+        .terminal-output .sys {
+            color: #81c4ff
+        }
+        .terminal-output .err {
+            color: #ffdad6
+        }
+        
+        .img-mask {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- Grain Overlay -->
+<div class="grain-overlay"></div>
+<!-- Cyber Grid Background -->
+<div class="cyber-grid" id="cyber-grid">
+<div class="cyber-grid-fallback"></div>
+</div>
+<!-- Scroll Progress Bar -->
+<div class="fixed top-0 left-0 h-1 bg-[#00FF66] shadow-[0_0_10px_#00FF66] z-[10000] origin-left scale-x-0 transition-transform duration-75" id="scroll-progress"></div>
+<!-- Interactive Toggle -->
+<button class="fixed bottom-4 left-4 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full font-label-caps text-label-caps interactive hover:scale-105 transition-transform magnetic shadow-lg flex items-center gap-2" id="toggle-grid">
+<span class="material-symbols-outlined text-sm">grid_4x4</span>
+        Toggle Cyber Grid
+    </button>
+<div class="" id="custom-cursor" style="translate: none; rotate: none; scale: none; transform: translate(-50%, -50%) translate3d(1255.66px, 2817.98px, 0px);"></div>
+<!-- TopNavBar Component -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out bg-transparent" id="main-nav">
+<div class="flex justify-between items-center px-gutter py-4 mx-auto w-full z-50 transition-all duration-500" id="nav-container">
+<div class="font-headline-md text-headline-md font-bold text-on-primary kinetic-text" id="nav-logo"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: start; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sabiq</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Muttaq</div></div></div></div><div class="hidden md:flex gap-8 items-center" id="nav-links">
+<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#about">About</a>
+<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#projects">Project</a>
+<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#gallery">Gallery</a>
+</div>
+<a class="hidden md:inline-flex bg-on-primary text-primary-container px-6 py-2 rounded-lg font-body-md text-body-md font-semibold hover:bg-surface-bright transition-colors interactive magnetic" href="#contact">
+                Contact
+            </a>
+<button class="md:hidden text-on-primary interactive magnetic">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>menu</span>
+</button>
+</div>
+</nav>
+<main class="relative z-10">
+<!-- SECTION 1: About (FULL-BLEED OCEAN BLUE) -->
+<section class="bg-primary-container min-h-screen relative pt-32 pb-section-padding-mobile md:pb-0 flex items-center overflow-hidden" id="about">
+<div class="max-w-container-max mx-auto px-gutter w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+<div class="md:col-span-6 flex flex-col items-start justify-center h-full text-left order-2 md:order-1 mt-8 md:mt-0">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-xl md:text-headline-xl text-on-primary mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sabiq</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Muttaqin.</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Robotics</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Electrical</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Engineer.</div></div></div></h1><p class="font-body-lg text-body-lg text-on-primary opacity-90 max-w-xl mb-10 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                        Specializing in ROS2, autonomous systems, and custom PCB engineering. Building reliable, machine-grade solutions from schematic to physical deployment.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<a class="inline-flex justify-center items-center bg-on-primary text-primary-container px-8 py-4 rounded-lg font-body-md text-body-md font-bold hover:bg-surface-bright transition-colors shadow-sm interactive magnetic" href="#projects">
+                            View my work 
+                            <span class="material-symbols-outlined ml-2 text-sm">arrow_downward</span>
+</a>
+<a class="inline-flex justify-center items-center border-2 border-on-primary text-on-primary px-8 py-4 rounded-lg font-body-md text-body-md font-bold hover:bg-on-primary hover:text-primary-container transition-colors interactive magnetic" href="#contact">
+                            Download CV
+                        </a>
+</div>
+</div>
+<div class="md:col-span-6 relative h-[60vh] md:h-[90vh] flex justify-center items-center order-1 md:order-2 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="absolute inset-0 bg-secondary-fixed/20 blur-3xl rounded-full scale-75"></div>
+<div class="relative w-full max-w-md aspect-[3/4] bg-white/10 p-2 backdrop-blur-md rounded-3xl shadow-2xl">
+<div class="w-full h-full bg-primary-container rounded-2xl overflow-hidden relative flex items-end justify-center img-mask">
+<img alt="Sabiq Muttaqin Profile" class="gs-parallax-img object-cover h-full w-full" data-alt="Cutout profile image of Sabiq Muttaqin, a professional robotics and electrical engineer. High quality, clean lighting, wearing a red jacket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiI_uJz-dLDNAECxC43DmCZXtlH-RyZD_nJ_8ZWGMBCJUdYJXO9SYo0fIaD8MWiznZ-8lZ_DM0oTCVsqyZ3F-SSWO9828xztX87g9YPKFRn-FQ65fNMOqxi8r7aaZ9lDMPdlyaI7XmKLBcPvocrU0TeCV_bK6D-tRZ-EI3vDby-xnTOv7_DbgL4yFsxm1kGxi24yqD5bFuUdPn4Lp54vdezF_UZgWIKJsnPWCLOMtGQiwzCDbuIWb8YEOpQ7v1sdzkJl-bMEPo8lFSvVE" style="translate: none; rotate: none; scale: none; transform: translate(0%, 8.4492%) translate3d(0px, 0px, 0px);"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Featured Projects (Zig-Zag Timeline with 3D) -->
+<section class="bg-surface-container-lowest py-section-padding-mobile md:py-section-padding-desktop relative z-10" id="projects">
+<div class="max-w-container-max mx-auto px-gutter">
+<!-- Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 border-b border-surface-dim pb-8">
+<div class="max-w-2xl text-left">
+<span class="font-label-caps text-label-caps text-outline block mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PORTFOLIO</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Timeline</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Projects</div></div></div></h2></div>
+<div class="mt-4 md:mt-0 max-w-md text-left md:text-right gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            An interactive journey through my core engineering focus over the years.
+                        </p>
+</div>
+</div>
+<!-- Project 1 (2024): Model Left / Text Right -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32 project-scroll-section" id="project-2024">
+<div class="md:col-span-5 md:order-1 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
+<model-viewer alt="3D representation of agricultural tech" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="239.84975854051152deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2024" src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"></model-viewer>
+</div>
+</div>
+<div class="md:col-span-7 md:order-2 order-1 flex flex-col justify-center text-left py-8">
+<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2024</span>
+<span class="text-outline font-label-caps text-xs">AGRICULTURAL ROBOTICS</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Solar</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Panel</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PCB</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Monitoring</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sawah</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                            Developed an autonomous monitoring unit for rice fields (sawah), integrating custom PCBs and solar panels for sustainable, continuous operation. The system provides real-time data on soil moisture and ambient conditions.
+                        </p>
+<div class="flex gap-4">
+<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Research Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2luBVQw2Z-SzNNcujs46FAg7aCijrDc3Zch4I5t0HBiF9zNN6ZI63pDBbOuGWzNP_ascVID_Wf2f6rR8NS04_BkJZJ0WDhf1vsGXzcVOBt7PfDDHY17cOy9mdVUZXCY2EJ-csfZXz0RANnzcKuNXAQWFwGwvVSjF9k9pJyMAxseCexXdgQagPeVRs8zteQJ4awOXzud6W8cgtswPHgXBe72P19V3lA5q1tedD7NSBuLInsQvBmDrPvC44ek_deuW7RdVDO9nWaMll8OQ" style="translate: none; rotate: none; scale: none; transform: translate(0%, 6.5451%) translate3d(0px, 0px, 0px) scale(1.0864, 1.0864);"/>
+</div>
+</div>
+</div>
+<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Research Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRZXACUQhLpBEauCILv_Jass2Nmy7UzJvfH_cONwSvdDvlwmOmzowkwc6BFsmAWzidnMAkeLBg9dCiJd3ZwwRztSFuiIdX03p2IT7yLUccLqYbV7cC4IlYqvfOkgCkBIzkdiXhqBNRpmhNvg25t9Mmg9hXARyPqzOYIh_BHC3cHBXVwv1ANH6_Qrerw_QkI3dc1hQC4wqBxx9yptDtDr1G9h79bYK1nh4DWpkCdTZSGbDCmXwr2xe_Dy7W3M10HejmVIbMPH0EUQdX-Z4" style="translate: none; rotate: none; scale: none; transform: translate(0%, 6.5293%) translate3d(0px, 0px, 0px) scale(1.0868, 1.0868);"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 2 (2025): Text Left / Model Right -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32 project-scroll-section" id="project-2025">
+<div class="md:col-span-7 md:order-1 order-1 flex flex-col justify-center text-left py-8">
+<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2025</span>
+<span class="text-outline font-label-caps text-xs">HARDWARE ENGINEERING</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Custom</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PCB</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Keyboard</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                            Designed and fabricated a custom mechanical keyboard PCB from scratch. This project focused on advanced routing techniques, matrix optimization, and firmware programming for a premium typing experience.
+                        </p>
+<div class="flex gap-4">
+<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Assembly Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvNM0p1zYnYznf6dXZjzAW8Ta16sfJGmORneFk551wqrPEhZBhbkAKIAiLli6-dcXgiTa9CeVSfYlTn7XOSq7pv7mem14KupeJc_sr1g3tVTYi57tLmqUUWKcs8FewGnUkwp_Z-FgOaKhX7K_0mRocjEKMw8Z0NEi2BHHXDT_-_6HNqKIlB9C-bF0xLwlGrwQPpfxufH7QZMJTpKTuL8Y-sS_Pa5KhEDPMHuDeug8j9qYyQ1pgdXh1JxHc792KkXDQc0IdhkyfFhr9MOU" style="translate: none; rotate: none; scale: none; transform: translate(0%, 5.3506%) translate3d(0px, 0px, 0px) scale(1.1162, 1.1162);"/>
+</div>
+</div>
+</div>
+<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Assembly Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrQLCGQ1P61gOAgvehC_nw3GkLHmlU3dOOPnJocucogs2A3g9ZAPH2VkMvagEqLK7DMshYGrxlBWllXnv2BGNtNwRz46Bs-jeHYDJliRMXLk43uKekjiZVNAjaYZ_lNwRT5Ckjw9DatbhVzAYsffui9mZAxfEEJo5T7Kn4MDdGQeSFwk_-J6hhr6-Pe3wW2yB0qT_rKSUCF1MeGeCma8PxV4eufNlNcoGNPGB-391ZuZOCAIyev-Ya7I-fMZQpmIyeZU5JCBNkJ_60D1s" style="translate: none; rotate: none; scale: none; transform: translate(0%, 5.3294%) translate3d(0px, 0px, 0px) scale(1.1168, 1.1168);"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 md:order-2 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
+<model-viewer alt="3D representation of PCB" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="199.1557860847791deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2025" src="https://modelviewer.dev/shared-assets/models/shishkebab.glb"></model-viewer>
+</div>
+</div>
+</div>
+<!-- Project 3 (2026): Model Left / Text Right -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 project-scroll-section" id="project-2026">
+<div class="md:col-span-5 md:order-1 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
+<model-viewer alt="3D representation of ASV" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="158.46181362904667deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2026" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"></model-viewer>
+</div>
+</div>
+<div class="md:col-span-7 md:order-2 order-1 flex flex-col justify-center text-left py-8">
+<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2026</span>
+<span class="text-outline font-label-caps text-xs">MARINE ROBOTICS</span>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Kapal</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">ASV</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">(Autonomous</div> <div class="word" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Surface</div> <div class="word" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Vehicle)</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+                            Spearheaded the engineering of a robust Aquatic Surface Vehicle for lake surveying and environmental monitoring. Features include long-range telemetry, ruggedized sensor payloads, and autonomous waypoint navigation.
+                        </p>
+<div class="flex gap-4">
+<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Trial Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFNSSL2Yid68Zgf0GGIxcJdI4o44bRn1a2wlmoUrIPFakNLgFdjdi8EPZ2S-kou0_WvnpnfdVCQTZ9wYSDiu59vU_nbgkuOvmcDHezx1tkZOLc5IIwu3NoxqrW_LosjGs7lyiYnrWl3FYXtlFXSKyh04eYyfaVr9JRLOxHMw-V3xHpQqTNfs6oyIqObt2uMoOSX8XwtOShk3oY-GkCZrBgKahc9AbVbwuLFI_QqWZLntuNbIsezd9aGnWwhUCBcUcUwCeCaJ-vG21bEeQ" style="translate: none; rotate: none; scale: none; transform: translate(0%, 4.1561%) translate3d(0px, 0px, 0px) scale(1.1461, 1.1461);"/>
+</div>
+</div>
+</div>
+<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
+<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
+<img alt="Trial Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrt3vvHMGuyfziE3KEWCGgukMAsSWkh5Oa3sKqkF9DvNz-fMzYke9rVK1MHqw7UkpiOKJ1SMg53AqVf-Chhzzgvjb2bKX07o2ktRVhOnhi3BsnK4pKp9qXhW8wo8VYj_huHq_2HK1ty1uaHFeLMOAjFpbmxO-TqBTDULvuOJSx8u0nY9wEwr2qLaXQRth_SgMaJykL4inHmoFnamPQKcWyCxuTLMn9LrKooc7zknDtwUUurXX7lCMaO8RwHFesU7ajypROBMq7-djwb_o" style="translate: none; rotate: none; scale: none; transform: translate(0%, 4.1295%) translate3d(0px, 0px, 0px) scale(1.1468, 1.1468);"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Project Gallery & Interactive Terminal -->
+<section class="bg-[#000000] py-section-padding-mobile md:py-section-padding-desktop relative z-10" id="gallery">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="mb-12">
+<span class="font-label-caps text-label-caps text-outline block mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">IN THE LAB</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-12 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: start; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Visuals</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Prototypes</div></div></div></h2></div>
+<!-- Terminal UI Section -->
+<div class="w-full bg-[#050505] border border-gray-800 rounded-lg shadow-2xl mb-16 overflow-hidden flex flex-col interactive gs-reveal" style="height: 350px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="bg-gray-900 px-4 py-2 flex items-center justify-between border-b border-gray-800">
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+</div>
+<div class="text-gray-500 font-mono text-xs">sabiq@ros2-master: ~/workspace</div>
+</div>
+<div class="p-6 font-mono text-sm h-full overflow-y-auto terminal-output flex flex-col" id="terminal-content">
+<p class="sys">ROS_VERSION=2</p>
+<p class="sys">ROS_DISTRO=humble</p>
+<p class="sys">Starting interactive shell... Type 'help' for commands.</p>
+<br/>
+</div>
+<div class="p-4 bg-[#050505] flex items-center">
+<span class="text-[#00FF66] font-mono mr-2">sabiq@ros2:~$</span>
+<input autocomplete="off" class="bg-transparent text-[#00FF66] border-none outline-none flex-1 font-mono focus:ring-0 p-0" id="terminal-input" spellcheck="false" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project Card 1 -->
+<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
+<img alt="ASV Testing" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1XdK6vOHGRAmc72IAC4NTpQhZt2rrji0fqwAV-N4BFGRnfcAaW-8uQkVVjcfdPIt49Z4JwLVj52xBYc4umdSedmp8k270CV4k0df9DzTAT-2iniEkxuFF-VOHlyvN1AndS8vJcrXsWnzXQ4Z6xsLIYTPThvZRSGrcFOG1Y85qoCR3eoSpKOuhfUBS-ZAsWnpe5KvZ4MjCUBiyb2m2dY3IRt2VONEZHZuoFc4xcijLMi6LDSzJa3TIEMxi5T" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">FIELD TESTING</span>
+<h3 class="font-headline-md text-white text-lg">Field Testing &amp; Deployment</h3>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
+<img alt="Hardware Lab" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1WW6EB18O0ZVOSm3s1Jyq0g00oZXXeaeYFqKAUcAqYULtTnhtyqIfb0xU7Na5iWnH_PZwt96PoW21hgkpeJu0ZKuEylKSPWPBZQptBs3-9jlei9tSrKJPaTEUkE2th4o1jQemsGrUqa9NnDVJaodqpmKp1Na5_nIZkY_GWpDxgCBcyQ_J919iLDVBjVfQVdqw0nI7aI9n-E9HHzvHD66zljc1Jf8GkQAeJdFzY7SRXsCGLPLeWpFvbkmEeG" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">HARDWARE</span>
+<h3 class="font-headline-md text-white text-lg">Hardware &amp; Soldering Lab</h3>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
+<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
+<img alt="PCB Render" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1U5acIam4RH73T9IPXqm551_lzwd-arvDnqJGFinpjf-qfIEsYokDLHSvJeOaC7qF86eOQALYyULAdsBAWEBZN44R07_L8oCJ2wR6rvSbQ7CsBxj8KFXiY5UWpsJvyUMgf0-s8mmTMxSpiC0Joe0eZSzEnNVgFKXphdBjLv7Kj1UHE3wS52g48UUhJEW2j9mOhqUzmSeMoFOjcz3EeFzakBi1bETqIuQRTTmCACAHhfBP6-NHf1y4ZN2iTo" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">DESIGN</span>
+<h3 class="font-headline-md text-white text-lg">3D CAD &amp; KiCad Renders</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Stack & Expertise Section -->
+<section class="bg-[#000000] py-16 relative z-10 border-t border-gray-800" id="tech-stack">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="mb-12 text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-4 gs-reveal">Technical Stack &amp; Expertise</h2>
+<p class="font-body-md text-gray-400 max-w-2xl mx-auto gs-reveal">A comprehensive overview of my hardware, software, and systems engineering toolkit.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Embedded & Hardware -->
+<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#00FF66]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(0,255,102,0.1)]">
+<div class="mb-6 flex items-center gap-4">
+<span class="material-symbols-outlined text-[#00FF66] text-3xl group-hover:scale-110 transition-transform">memory</span>
+<h3 class="text-white font-headline-md text-xl">Embedded &amp; Hardware</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Jetson</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Raspberry Pi</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">ESP32</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Arduino</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Flight Controller Pixhawk</span>
+</div>
+</div>
+<!-- Software & Systems -->
+<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#81c4ff]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(129,196,255,0.1)]">
+<div class="mb-6 flex items-center gap-4">
+<span class="material-symbols-outlined text-[#81c4ff] text-3xl group-hover:scale-110 transition-transform">terminal</span>
+<h3 class="text-white font-headline-md text-xl">Software &amp; Systems</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Python</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">C++</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Linux</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Computer Vision</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">ROS2 (Fusion)</span>
+</div>
+</div>
+<!-- Design & Workflow -->
+<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#003594]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(0,53,148,0.2)]">
+<div class="mb-6 flex items-center gap-4">
+<span class="material-symbols-outlined text-[#81c4ff] text-3xl group-hover:scale-110 transition-transform">architecture</span>
+<h3 class="text-white font-headline-md text-xl">Design &amp; Workflow</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">PCB Design</span>
+<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Team Collaboration</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TIER 1: Personal Microtabs -->
+<section class="bg-[#0B0F19] py-16 text-center relative z-10" id="contact">
+<div class="max-w-container-max mx-auto px-gutter flex flex-col items-center">
+<h3 class="text-white text-2xl md:text-3xl font-medium mb-8 max-w-3xl kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: center; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Engineering</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">autonomous</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">systems</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">with</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">precision,</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: center; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">curiosity,</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">and</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">purpose.</div></div></div></h3><div class="flex flex-wrap justify-center gap-3 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
+<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
+<span class="">🌏</span> Bandung, Indonesia
+                    </div>
+<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
+<span class="">🤖</span> Building Roboboats &amp; ROS2 since college
+                    </div>
+<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
+<span class="">☕</span> Powered by coffee &amp; KiCad
+                    </div>
+<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
+<span class="">⚡</span> Hardware &amp; PCB Enthusiast
+                    </div>
+</div>
+</div>
+</section>
+<!-- TIER 2: Giant CTA Footer -->
+<footer class="bg-primary-container text-white pt-24 pb-8 flex flex-col relative z-10">
+<div class="max-w-container-max mx-auto px-gutter w-full flex-grow">
+<!-- Giant CTA -->
+<a class="block group arrow-hover-group mb-16 inline-block interactive magnetic gs-reveal" href="mailto:sabiq.obiq@gmail.com" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
+<h2 class="text-6xl md:text-8xl font-bold tracking-tight hover:opacity-80 transition-opacity">
+                        Say hello <span class="inline-block arrow-icon">↗</span>
+</h2>
+</a>
+<!-- Divider -->
+<hr class="border-white/20 mb-12 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);"/>
+<!-- Metadata -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
+<div>
+<h4 class="font-label-caps text-white/70 mb-4">EMAIL</h4>
+<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="mailto:sabiq.obiq@gmail.com">sabiq.obiq@gmail.com<br/></a>
+</div>
+<div>
+<h4 class="font-label-caps text-white/70 mb-4">ELSEWHERE</h4>
+<div class="flex flex-col gap-2 items-start">
+<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#">LinkedIn</a>
+<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="https://github.com/salamut" target="_blank" rel="noopener noreferrer">GitHub</a>
+</div>
+</div>
+<div>
+<h4 class="font-label-caps text-white/70 mb-4">BASED IN</h4>
+<p class="text-xl font-medium">Bandung, West Java</p>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="flex flex-col md:flex-row justify-between items-center text-sm font-medium text-white/80 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
+<div class="">© 2026 Sabiq Muttaqin</div>
+<div class="mt-4 md:mt-0 font-label-caps tracking-widest text-xs">DESIGNED AND BUILT WITH PRECISION</div>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // --- 1. Init Lenis Smooth Scroll ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Sync Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time)=>{
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // --- 3. Physics Cursor (quickSetter) ---
+        gsap.set("#custom-cursor", {xPercent: -50, yPercent: -50});
+        let xTo = gsap.quickTo("#custom-cursor", "x", {duration: 0.4, ease: "power3"}),
+            yTo = gsap.quickTo("#custom-cursor", "y", {duration: 0.4, ease: "power3"});
+
+        window.addEventListener("mousemove", e => {
+            xTo(e.clientX);
+            yTo(e.clientY);
+        });
+
+        const cursor = document.getElementById('custom-cursor');
+        const interactives = document.querySelectorAll('.interactive');
+        interactives.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        // --- 4. Magnetic Effect (GSAP) ---
+        const magnetics = document.querySelectorAll('.magnetic');
+        magnetics.forEach((btn) => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const h = rect.width / 2;
+                
+                const x = e.clientX - rect.left - h;
+                const y = e.clientY - rect.top - h;
+
+                // Adjust magnetic pull radius (50px ish as requested)
+                const rx = x * 0.3;
+                const ry = y * 0.3;
+
+                gsap.to(btn, {
+                    x: rx,
+                    y: ry,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
+            });
+        });
+
+        // --- 5. Kinetic Text (SplitType + GSAP) ---
+        // Setup SplitType for Kinetic Text
+        const kineticTexts = document.querySelectorAll('.kinetic-text');
+        kineticTexts.forEach(text => {
+            // Split into lines first, then wrap lines
+            const split = new SplitType(text, { types: 'lines, words' });
+            
+            // Wrap each line in a div with overflow-hidden for the reveal mask
+            split.lines.forEach(line => {
+                const wrapper = document.createElement('div');
+                wrapper.classList.add('line-mask');
+                wrapper.style.overflow = 'hidden';
+                line.parentNode.insertBefore(wrapper, line);
+                wrapper.appendChild(line);
+            });
+
+            // Animate reveal
+            gsap.from(split.words, {
+                yPercent: 100,
+                autoAlpha: 0,
+                duration: 1.2,
+                ease: 'power3.out',
+                stagger: 0.03,
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // --- 6. Image Parallax (GSAP) ---
+        // Image Parallax zoom out from 1.2 to 1.0 (or opposite depending on scroll direction)
+        gsap.utils.toArray('.gs-parallax-img').forEach(function(img) {
+            gsap.to(img, {
+                scale: 1, // End scale
+                yPercent: 10, // Slight vertical movement opposite to scroll
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.closest('.img-mask'),
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // --- General Reveals ---
+        gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
+            gsap.fromTo(elem, 
+                { y: 30, autoAlpha: 0 }, 
+                {
+                    duration: 1, 
+                    y: 0, 
+                    autoAlpha: 1, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height);
+            scrollProgress.style.transform = `scaleX(${scrolled})`;
+        });
+
+        // Smooth Model Viewer Rotation (Lerp)
+        gsap.utils.toArray('model-viewer').forEach(function(model) {
+            ScrollTrigger.create({
+                trigger: model.closest('.project-scroll-section'),
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1, // Add 1 second smoothing/lerping
+                onUpdate: self => {
+                    const angle = self.progress * 360;
+                    model.setAttribute('camera-orbit', `${angle}deg 75deg auto`);
+                }
+            });
+        });
+
+        // Dynamic Nav
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            const navContainer = document.getElementById('nav-container');
+            const navLogo = document.getElementById('nav-logo');
+            const navLinks = document.getElementById('nav-links').querySelectorAll('a');
+            
+            if (window.scrollY > 20) {
+                nav.classList.remove('w-full');
+                nav.classList.add('top-4', 'left-1/2', '-translate-x-1/2', 'w-[90%]', 'max-w-4xl', 'rounded-full', 'bg-gray-200/90', 'backdrop-blur-md', 'shadow-lg');
+                navContainer.classList.remove('px-gutter', 'py-4', 'max-w-container-max');
+                navContainer.classList.add('px-8', 'py-2');
+                navLogo.classList.remove('text-on-primary');
+                navLogo.classList.add('text-primary');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-on-primary');
+                    link.classList.add('text-on-surface');
+                });
+            } else {
+                nav.classList.add('w-full');
+                nav.classList.remove('top-4', 'left-1/2', '-translate-x-1/2', 'w-[90%]', 'max-w-4xl', 'rounded-full', 'bg-gray-200/90', 'backdrop-blur-md', 'shadow-lg');
+                navContainer.classList.add('px-gutter', 'py-4', 'max-w-container-max');
+                navContainer.classList.remove('px-8', 'py-2');
+                navLogo.classList.add('text-on-primary');
+                navLogo.classList.remove('text-primary');
+                navLinks.forEach(link => {
+                    link.classList.add('text-on-primary');
+                    link.classList.remove('text-on-surface');
+                });
+            }
+        });
+
+        // Interactive Cyber Grid Toggle
+        const btnToggle = document.getElementById('toggle-grid');
+        const grid = document.getElementById('cyber-grid');
+        btnToggle.addEventListener('click', () => {
+            grid.classList.toggle('active');
+        });
+
+        // Terminal Interactive Setup
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalContent = document.getElementById('terminal-content');
+        
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const cmd = this.value.trim();
+                if (cmd) {
+                    const echo = document.createElement('p');
+                    echo.innerHTML = `<span class="text-[#00FF66]">sabiq@ros2:~$</span> ${cmd}`;
+                    terminalContent.appendChild(echo);
+                    
+                    const response = document.createElement('p');
+                    if (cmd === 'help') {
+                        response.className = 'sys';
+                        response.innerHTML = 'Available commands: ros2 launch, status, clear, help';
+                    } else if (cmd === 'status') {
+                        response.className = 'cmd';
+                        response.innerHTML = 'System Status: All nodes active.<br/>[INFO] [slam_toolbox]: Node started<br/>[INFO] [nav2_controller]: Active';
+                    } else if (cmd.startsWith('ros2 launch')) {
+                        response.className = 'sys';
+                        response.innerHTML = `[INFO] [launch]: Default logging verbosity is set to INFO<br/>[INFO] [robot_state_publisher]: Starting...<br/>Waiting for odometry...`;
+                    } else if (cmd === 'clear') {
+                        terminalContent.innerHTML = '';
+                    } else {
+                        response.className = 'err';
+                        response.innerHTML = `Command '${cmd}' not found.`;
+                    }
+                    if (cmd !== 'clear') {
+                        terminalContent.appendChild(response);
+                    }
+                    
+                    this.value = '';
+                    terminalContent.scrollTop = terminalContent.scrollHeight;
+                }
+            }
+        });
+    </script>
+</body></html>
