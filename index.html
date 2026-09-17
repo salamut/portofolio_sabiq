@@ -1,836 +1,2080 @@
 <!DOCTYPE html>
+<!--
+   v.06 changes:
+   - Work Gallery rebuilt around 4 real projects (was 6 stock placeholders)
+   - Real project photography wired in; all stock imagery removed
+   - GitHub links verified against github.com/salamut
+   - Stale info corrected (availability, stack, KiCad -> EasyEDA/EAGLE, name)
 
-<html class="light lenis" lang="en" style=""><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sabiq Muttaqin - Robotics &amp; Electrical Engineer</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js" type="module"></script>
-<!-- Scripts for Animations & Interactions -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js"></script>
-<script src="https://unpkg.com/split-type"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "secondary-fixed-dim": "#94ccff",
-                        "surface-bright": "#faf8ff",
-                        "primary": "#003594",
-                        "on-background": "#191b23",
-                        "on-primary-fixed": "#00174b",
-                        "on-tertiary-fixed-variant": "#7d2d00",
-                        "secondary-fixed": "#cde5ff",
-                        "on-surface-variant": "#434654",
-                        "outline": "#737685",
-                        "on-error": "#ffffff",
-                        "error": "#ba1a1a",
-                        "tertiary": "#6e2700",
-                        "on-primary-container": "#b8c8ff",
-                        "outline-muted": "#737686",
-                        "ocean-deep": "#2563eb",
-                        "on-secondary": "#ffffff",
-                        "on-secondary-fixed-variant": "#004b74",
-                        "secondary": "#016398",
-                        "surface-container-lowest": "#ffffff",
-                        "surface": "#faf8ff",
-                        "inverse-on-surface": "#f0f0fb",
-                        "inverse-surface": "#2e3039",
-                        "outline-variant": "#c3c6d6",
-                        "surface-container-high": "#e7e7f3",
-                        "tertiary-container": "#943700",
-                        "inverse-primary": "#b4c5ff",
-                        "on-secondary-container": "#00517e",
-                        "error-container": "#ffdad6",
-                        "primary-fixed-dim": "#b4c5ff",
-                        "on-error-container": "#93000a",
-                        "surface-container-low": "#f3f3fe",
-                        "surface-tint": "#1b55d0",
-                        "tertiary-fixed": "#ffdbcd",
-                        "background": "#faf8ff",
-                        "surface-container-highest": "#e1e1ed",
-                        "glass-nav": "rgba(229, 231, 235, 0.9)",
-                        "on-secondary-fixed": "#001d32",
-                        "primary-container": "#004ac6",
-                        "on-tertiary": "#ffffff",
-                        "surface-dim": "#d9d9e4",
-                        "surface-dark": "#000000",
-                        "secondary-container": "#81c4ff",
-                        "on-surface": "#191b23",
-                        "tertiary-fixed-dim": "#ffb596",
-                        "surface-variant": "#e1e1ed",
-                        "on-primary-fixed-variant": "#003ea8",
-                        "on-tertiary-fixed": "#360f00",
-                        "on-tertiary-container": "#ffba9d",
-                        "surface-container": "#ededf8",
-                        "on-primary": "#ffffff",
-                        "primary-fixed": "#dbe1ff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "24px",
-                        "section-padding-mobile": "64px",
-                        "container-max": "1280px",
-                        "base": "8px",
-                        "section-padding-desktop": "120px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Plus Jakarta Sans"],
-                        "headline-xl": ["Plus Jakarta Sans"],
-                        "headline-lg-mobile": ["Plus Jakarta Sans"],
-                        "body-lg": ["Plus Jakarta Sans"],
-                        "body-md": ["Plus Jakarta Sans"],
-                        "headline-lg": ["Plus Jakarta Sans"],
-                        "label-caps": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
-                        "headline-xl": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        body {
-            font-family: "Plus Jakarta Sans", sans-serif;
-            cursor: none;
-            overflow-x: hidden;
-        }
-        #custom-cursor {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: rgba(0, 74, 198, 0.5);
-            border: 2px solid #004ac6;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: difference;
-            will-change: width, height, transform;
-        }
-        #custom-cursor.hovering {
-            width: 48px;
-            height: 48px;
-            background-color: rgba(0, 74, 198, 0.2);
-        }
-        
-        /* Sharpen Images */
-        img {
-            image-rendering: -webkit-optimize-contrast;
-            backface-visibility: hidden;
-            will-change: transform;
-        }
+   v.05 changes:
+   - Portrait 3D tilt with cursor-tracking spotlight
+   - Gallery card magnetic image sway + subtle card tilt
+   - Blur-up image reveal with CSS custom property composition
+   - Click-to-copy email chips
+   - View Transitions API for theme swap with CSS fallback
+   - Cursor label edge-flip, Fraunces opsz tuning, ::selection,
+     higher-res Unsplash srcset
 
-        /* SplitText Lines */
-        .line {
-            overflow: hidden;
-            padding-bottom: 0.1em; /* Prevent descender cropping */
-        }
-        .word {
-            display: inline-block;
-        }
+   v.04 changes:
+   - Theme system (light + dark) with localStorage
+   - Nav morphs into floating capsule on scroll
+   - Cursor color/state driven by CSS variables (fixes on-dark bug)
+   - Cursor bug fixes A-G
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Sabiq Almuttaqin — Electrical Engineer | Embedded Systems &amp; Robotics</title>
+<meta name="description" content="Electrical Engineering portfolio focused on embedded systems, electronics, PCB design, automation, control systems, and autonomous robotics. Based in Bandung, Indonesia.">
+<meta name="theme-color" content="#F5F2EC">
 
-        /* Glassmorphic Tech Frames Brackets */
-        .tech-frame {
-            position: relative;
-        }
-        .tech-frame::before, .tech-frame::after,
-        .tech-frame-inner::before, .tech-frame-inner::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-color: rgba(0, 74, 198, 0.8);
-            border-style: solid;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .tech-frame::before {
-            top: 0; left: 0;
-            border-width: 2px 0 0 2px;
-            border-top-left-radius: 12px;
-        }
-        .tech-frame::after {
-            top: 0; right: 0;
-            border-width: 2px 2px 0 0;
-            border-top-right-radius: 12px;
-        }
-        .tech-frame-inner::before {
-            bottom: 0; left: 0;
-            border-width: 0 0 2px 2px;
-            border-bottom-left-radius: 12px;
-        }
-        .tech-frame-inner::after {
-            bottom: 0; right: 0;
-            border-width: 0 2px 2px 0;
-            border-bottom-right-radius: 12px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
-        /* Arrow hover effect */
-        .arrow-hover-group:hover .arrow-icon {
-            transform: translate(4px, -4px)
-        }
-        .arrow-icon {
-            transition: transform 0.3s ease
-        }
-        ::-webkit-scrollbar {
-            width: 8px
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05)
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #004ac6;
-            border-radius: 999px;
-            border: 2px solid transparent;
-            background-clip: padding-box
-        }
-        .grain-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9998;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.03
-        }
-        .cyber-grid {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuADYnVpBVM6zYBq4tA8OgfYB3gjp-iSdM8nKDVV5DyLtFabgCmetptr1LF8mUlq4-05ar_1TZ5lfiUtROktRi57awr0Q6YLtfwOOYEIcs3PgdooGg88rPgKDSbvqH6DZS3UE-47XWMAP30ZrMeVf8yJfe--gfe7hw57-tBpB1en_Rj6bzFha53xJksIsn_t4RRUQfanubnWxiPtffS6rWQTIt-wF8lx3FxKLk8btEInSL-lAPe6MgHrzQ);
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 0.5s ease
-        }
-        .cyber-grid.active {
-            opacity: 0.15
-        }
-        .cyber-grid-fallback {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(transparent 95%, rgba(0, 255, 102, 0.1) 95%), linear-gradient(90deg, transparent 95%, rgba(0, 255, 102, 0.1) 95%);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotatex(60deg);
-            transform-origin: bottom;
-            pointer-events: none
-        }
-        .terminal-output p {
-            margin: 0;
-            padding: 2px 0
-        }
-        .terminal-output .cmd {
-            color: #0F6
-        }
-        .terminal-output .sys {
-            color: #81c4ff
-        }
-        .terminal-output .err {
-            color: #ffdad6
-        }
-        
-        .img-mask {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            border-radius: inherit;
-        }
-    </style>
-</head>
-<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary">
-<!-- Grain Overlay -->
-<div class="grain-overlay"></div>
-<!-- Cyber Grid Background -->
-<div class="cyber-grid" id="cyber-grid">
-<div class="cyber-grid-fallback"></div>
-</div>
-<!-- Scroll Progress Bar -->
-<div class="fixed top-0 left-0 h-1 bg-[#00FF66] shadow-[0_0_10px_#00FF66] z-[10000] origin-left scale-x-0 transition-transform duration-75" id="scroll-progress"></div>
-<!-- Interactive Toggle -->
-<button class="fixed bottom-4 left-4 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full font-label-caps text-label-caps interactive hover:scale-105 transition-transform magnetic shadow-lg flex items-center gap-2" id="toggle-grid">
-<span class="material-symbols-outlined text-sm">grid_4x4</span>
-        Toggle Cyber Grid
-    </button>
-<div class="" id="custom-cursor" style="translate: none; rotate: none; scale: none; transform: translate(-50%, -50%) translate3d(1255.66px, 2817.98px, 0px);"></div>
-<!-- TopNavBar Component -->
-<nav class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out bg-transparent" id="main-nav">
-<div class="flex justify-between items-center px-gutter py-4 mx-auto w-full z-50 transition-all duration-500" id="nav-container">
-<div class="font-headline-md text-headline-md font-bold text-on-primary kinetic-text" id="nav-logo"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: start; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sabiq</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Muttaq</div></div></div></div><div class="hidden md:flex gap-8 items-center" id="nav-links">
-<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#about">About</a>
-<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#projects">Project</a>
-<a class="font-body-md text-body-md text-on-primary hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#gallery">Gallery</a>
-</div>
-<a class="hidden md:inline-flex bg-on-primary text-primary-container px-6 py-2 rounded-lg font-body-md text-body-md font-semibold hover:bg-surface-bright transition-colors interactive magnetic" href="#contact">
-                Contact
-            </a>
-<button class="md:hidden text-on-primary interactive magnetic">
-<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>menu</span>
-</button>
-</div>
-</nav>
-<main class="relative z-10">
-<!-- SECTION 1: About (FULL-BLEED OCEAN BLUE) -->
-<section class="bg-primary-container min-h-screen relative pt-32 pb-section-padding-mobile md:pb-0 flex items-center overflow-hidden" id="about">
-<div class="max-w-container-max mx-auto px-gutter w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
-<div class="md:col-span-6 flex flex-col items-start justify-center h-full text-left order-2 md:order-1 mt-8 md:mt-0">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-xl md:text-headline-xl text-on-primary mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sabiq</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Muttaqin.</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Robotics</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Electrical</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Engineer.</div></div></div></h1><p class="font-body-lg text-body-lg text-on-primary opacity-90 max-w-xl mb-10 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-                        Specializing in ROS2, autonomous systems, and custom PCB engineering. Building reliable, machine-grade solutions from schematic to physical deployment.
-                    </p>
-<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<a class="inline-flex justify-center items-center bg-on-primary text-primary-container px-8 py-4 rounded-lg font-body-md text-body-md font-bold hover:bg-surface-bright transition-colors shadow-sm interactive magnetic" href="#projects">
-                            View my work 
-                            <span class="material-symbols-outlined ml-2 text-sm">arrow_downward</span>
-</a>
-<a class="inline-flex justify-center items-center border-2 border-on-primary text-on-primary px-8 py-4 rounded-lg font-body-md text-body-md font-bold hover:bg-on-primary hover:text-primary-container transition-colors interactive magnetic" href="#contact">
-                            Download CV
-                        </a>
-</div>
-</div>
-<div class="md:col-span-6 relative h-[60vh] md:h-[90vh] flex justify-center items-center order-1 md:order-2 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="absolute inset-0 bg-secondary-fixed/20 blur-3xl rounded-full scale-75"></div>
-<div class="relative w-full max-w-md aspect-[3/4] bg-white/10 p-2 backdrop-blur-md rounded-3xl shadow-2xl">
-<div class="w-full h-full bg-primary-container rounded-2xl overflow-hidden relative flex items-end justify-center img-mask">
-<img alt="Sabiq Muttaqin Profile" class="gs-parallax-img object-cover h-full w-full" data-alt="Cutout profile image of Sabiq Muttaqin, a professional robotics and electrical engineer. High quality, clean lighting, wearing a red jacket." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiI_uJz-dLDNAECxC43DmCZXtlH-RyZD_nJ_8ZWGMBCJUdYJXO9SYo0fIaD8MWiznZ-8lZ_DM0oTCVsqyZ3F-SSWO9828xztX87g9YPKFRn-FQ65fNMOqxi8r7aaZ9lDMPdlyaI7XmKLBcPvocrU0TeCV_bK6D-tRZ-EI3vDby-xnTOv7_DbgL4yFsxm1kGxi24yqD5bFuUdPn4Lp54vdezF_UZgWIKJsnPWCLOMtGQiwzCDbuIWb8YEOpQ7v1sdzkJl-bMEPo8lFSvVE" style="translate: none; rotate: none; scale: none; transform: translate(0%, 8.4492%) translate3d(0px, 0px, 0px);"/>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- SECTION 2: Featured Projects (Zig-Zag Timeline with 3D) -->
-<section class="bg-surface-container-lowest py-section-padding-mobile md:py-section-padding-desktop relative z-10" id="projects">
-<div class="max-w-container-max mx-auto px-gutter">
-<!-- Header -->
-<div class="flex flex-col md:flex-row md:items-end justify-between mb-20 border-b border-surface-dim pb-8">
-<div class="max-w-2xl text-left">
-<span class="font-label-caps text-label-caps text-outline block mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PORTFOLIO</span>
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Timeline</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Projects</div></div></div></h2></div>
-<div class="mt-4 md:mt-0 max-w-md text-left md:text-right gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<p class="font-body-md text-body-md text-on-surface-variant">
-                            An interactive journey through my core engineering focus over the years.
-                        </p>
-</div>
-</div>
-<!-- Project 1 (2024): Model Left / Text Right -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32 project-scroll-section" id="project-2024">
-<div class="md:col-span-5 md:order-1 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
-<model-viewer alt="3D representation of agricultural tech" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="239.84975854051152deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2024" src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"></model-viewer>
-</div>
-</div>
-<div class="md:col-span-7 md:order-2 order-1 flex flex-col justify-center text-left py-8">
-<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2024</span>
-<span class="text-outline font-label-caps text-xs">AGRICULTURAL ROBOTICS</span>
-</div>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Solar</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Panel</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PCB</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Monitoring</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Sawah</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-                            Developed an autonomous monitoring unit for rice fields (sawah), integrating custom PCBs and solar panels for sustainable, continuous operation. The system provides real-time data on soil moisture and ambient conditions.
-                        </p>
-<div class="flex gap-4">
-<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Research Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2luBVQw2Z-SzNNcujs46FAg7aCijrDc3Zch4I5t0HBiF9zNN6ZI63pDBbOuGWzNP_ascVID_Wf2f6rR8NS04_BkJZJ0WDhf1vsGXzcVOBt7PfDDHY17cOy9mdVUZXCY2EJ-csfZXz0RANnzcKuNXAQWFwGwvVSjF9k9pJyMAxseCexXdgQagPeVRs8zteQJ4awOXzud6W8cgtswPHgXBe72P19V3lA5q1tedD7NSBuLInsQvBmDrPvC44ek_deuW7RdVDO9nWaMll8OQ" style="translate: none; rotate: none; scale: none; transform: translate(0%, 6.5451%) translate3d(0px, 0px, 0px) scale(1.0864, 1.0864);"/>
-</div>
-</div>
-</div>
-<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Research Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRZXACUQhLpBEauCILv_Jass2Nmy7UzJvfH_cONwSvdDvlwmOmzowkwc6BFsmAWzidnMAkeLBg9dCiJd3ZwwRztSFuiIdX03p2IT7yLUccLqYbV7cC4IlYqvfOkgCkBIzkdiXhqBNRpmhNvg25t9Mmg9hXARyPqzOYIh_BHC3cHBXVwv1ANH6_Qrerw_QkI3dc1hQC4wqBxx9yptDtDr1G9h79bYK1nh4DWpkCdTZSGbDCmXwr2xe_Dy7W3M10HejmVIbMPH0EUQdX-Z4" style="translate: none; rotate: none; scale: none; transform: translate(0%, 6.5293%) translate3d(0px, 0px, 0px) scale(1.0868, 1.0868);"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Project 2 (2025): Text Left / Model Right -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-32 project-scroll-section" id="project-2025">
-<div class="md:col-span-7 md:order-1 order-1 flex flex-col justify-center text-left py-8">
-<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2025</span>
-<span class="text-outline font-label-caps text-xs">HARDWARE ENGINEERING</span>
-</div>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Custom</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">PCB</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Keyboard</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-                            Designed and fabricated a custom mechanical keyboard PCB from scratch. This project focused on advanced routing techniques, matrix optimization, and firmware programming for a premium typing experience.
-                        </p>
-<div class="flex gap-4">
-<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Assembly Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvNM0p1zYnYznf6dXZjzAW8Ta16sfJGmORneFk551wqrPEhZBhbkAKIAiLli6-dcXgiTa9CeVSfYlTn7XOSq7pv7mem14KupeJc_sr1g3tVTYi57tLmqUUWKcs8FewGnUkwp_Z-FgOaKhX7K_0mRocjEKMw8Z0NEi2BHHXDT_-_6HNqKIlB9C-bF0xLwlGrwQPpfxufH7QZMJTpKTuL8Y-sS_Pa5KhEDPMHuDeug8j9qYyQ1pgdXh1JxHc792KkXDQc0IdhkyfFhr9MOU" style="translate: none; rotate: none; scale: none; transform: translate(0%, 5.3506%) translate3d(0px, 0px, 0px) scale(1.1162, 1.1162);"/>
-</div>
-</div>
-</div>
-<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Assembly Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrQLCGQ1P61gOAgvehC_nw3GkLHmlU3dOOPnJocucogs2A3g9ZAPH2VkMvagEqLK7DMshYGrxlBWllXnv2BGNtNwRz46Bs-jeHYDJliRMXLk43uKekjiZVNAjaYZ_lNwRT5Ckjw9DatbhVzAYsffui9mZAxfEEJo5T7Kn4MDdGQeSFwk_-J6hhr6-Pe3wW2yB0qT_rKSUCF1MeGeCma8PxV4eufNlNcoGNPGB-391ZuZOCAIyev-Ya7I-fMZQpmIyeZU5JCBNkJ_60D1s" style="translate: none; rotate: none; scale: none; transform: translate(0%, 5.3294%) translate3d(0px, 0px, 0px) scale(1.1168, 1.1168);"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="md:col-span-5 md:order-2 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
-<model-viewer alt="3D representation of PCB" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="199.1557860847791deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2025" src="https://modelviewer.dev/shared-assets/models/shishkebab.glb"></model-viewer>
-</div>
-</div>
-</div>
-<!-- Project 3 (2026): Model Left / Text Right -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-12 project-scroll-section" id="project-2026">
-<div class="md:col-span-5 md:order-1 order-2 relative gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="sticky top-24 h-[400px] flex items-center justify-center bg-transparent">
-<model-viewer alt="3D representation of ASV" ar-status="not-presenting" auto-rotate="" camera-controls="" camera-orbit="158.46181362904667deg 75deg auto" class="w-full h-full object-contain bg-transparent" disable-zoom="" exposure="0.8" id="model-2026" src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"></model-viewer>
-</div>
-</div>
-<div class="md:col-span-7 md:order-2 order-1 flex flex-col justify-center text-left py-8">
-<div class="flex items-center gap-3 mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<span class="bg-primary text-on-primary px-3 py-1 rounded-full font-label-caps text-xs font-bold">2026</span>
-<span class="text-outline font-label-caps text-xs">MARINE ROBOTICS</span>
-</div>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-6 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: left; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Kapal</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">ASV</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">(Autonomous</div> <div class="word" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Surface</div> <div class="word" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Vehicle)</div></div></div></h3><p class="font-body-lg text-body-lg text-on-surface-variant mb-8 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-                            Spearheaded the engineering of a robust Aquatic Surface Vehicle for lake surveying and environmental monitoring. Features include long-range telemetry, ruggedized sensor payloads, and autonomous waypoint navigation.
-                        </p>
-<div class="flex gap-4">
-<div class="w-1/2 aspect-video gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Trial Photo 1" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFNSSL2Yid68Zgf0GGIxcJdI4o44bRn1a2wlmoUrIPFakNLgFdjdi8EPZ2S-kou0_WvnpnfdVCQTZ9wYSDiu59vU_nbgkuOvmcDHezx1tkZOLc5IIwu3NoxqrW_LosjGs7lyiYnrWl3FYXtlFXSKyh04eYyfaVr9JRLOxHMw-V3xHpQqTNfs6oyIqObt2uMoOSX8XwtOShk3oY-GkCZrBgKahc9AbVbwuLFI_QqWZLntuNbIsezd9aGnWwhUCBcUcUwCeCaJ-vG21bEeQ" style="translate: none; rotate: none; scale: none; transform: translate(0%, 4.1561%) translate3d(0px, 0px, 0px) scale(1.1461, 1.1461);"/>
-</div>
-</div>
-</div>
-<div class="w-1/2 aspect-video gs-reveal" style="margin-top: 24px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="tech-frame p-1.5 bg-gradient-to-br from-primary/40 via-outline-variant/20 to-transparent rounded-2xl shadow-2xl backdrop-blur-md h-full w-full">
-<div class="tech-frame-inner w-full h-full relative rounded-xl overflow-hidden bg-surface-container img-mask">
-<img alt="Trial Photo 2" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrt3vvHMGuyfziE3KEWCGgukMAsSWkh5Oa3sKqkF9DvNz-fMzYke9rVK1MHqw7UkpiOKJ1SMg53AqVf-Chhzzgvjb2bKX07o2ktRVhOnhi3BsnK4pKp9qXhW8wo8VYj_huHq_2HK1ty1uaHFeLMOAjFpbmxO-TqBTDULvuOJSx8u0nY9wEwr2qLaXQRth_SgMaJykL4inHmoFnamPQKcWyCxuTLMn9LrKooc7zknDtwUUurXX7lCMaO8RwHFesU7ajypROBMq7-djwb_o" style="translate: none; rotate: none; scale: none; transform: translate(0%, 4.1295%) translate3d(0px, 0px, 0px) scale(1.1468, 1.1468);"/>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- SECTION 3: Project Gallery & Interactive Terminal -->
-<section class="bg-[#000000] py-section-padding-mobile md:py-section-padding-desktop relative z-10" id="gallery">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="mb-12">
-<span class="font-label-caps text-label-caps text-outline block mb-4 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">IN THE LAB</span>
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-12 kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: start; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Visuals</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">&amp;</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Prototypes</div></div></div></h2></div>
-<!-- Terminal UI Section -->
-<div class="w-full bg-[#050505] border border-gray-800 rounded-lg shadow-2xl mb-16 overflow-hidden flex flex-col interactive gs-reveal" style="height: 350px; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="bg-gray-900 px-4 py-2 flex items-center justify-between border-b border-gray-800">
-<div class="flex gap-2">
-<div class="w-3 h-3 rounded-full bg-red-500"></div>
-<div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-<div class="w-3 h-3 rounded-full bg-green-500"></div>
-</div>
-<div class="text-gray-500 font-mono text-xs">sabiq@ros2-master: ~/workspace</div>
-</div>
-<div class="p-6 font-mono text-sm h-full overflow-y-auto terminal-output flex flex-col" id="terminal-content">
-<p class="sys">ROS_VERSION=2</p>
-<p class="sys">ROS_DISTRO=humble</p>
-<p class="sys">Starting interactive shell... Type 'help' for commands.</p>
-<br/>
-</div>
-<div class="p-4 bg-[#050505] flex items-center">
-<span class="text-[#00FF66] font-mono mr-2">sabiq@ros2:~$</span>
-<input autocomplete="off" class="bg-transparent text-[#00FF66] border-none outline-none flex-1 font-mono focus:ring-0 p-0" id="terminal-input" spellcheck="false" type="text"/>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Project Card 1 -->
-<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
-<img alt="ASV Testing" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1XdK6vOHGRAmc72IAC4NTpQhZt2rrji0fqwAV-N4BFGRnfcAaW-8uQkVVjcfdPIt49Z4JwLVj52xBYc4umdSedmp8k270CV4k0df9DzTAT-2iniEkxuFF-VOHlyvN1AndS8vJcrXsWnzXQ4Z6xsLIYTPThvZRSGrcFOG1Y85qoCR3eoSpKOuhfUBS-ZAsWnpe5KvZ4MjCUBiyb2m2dY3IRt2VONEZHZuoFc4xcijLMi6LDSzJa3TIEMxi5T" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
-<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">FIELD TESTING</span>
-<h3 class="font-headline-md text-white text-lg">Field Testing &amp; Deployment</h3>
-</div>
-</div>
-</div>
-<!-- Project Card 2 -->
-<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
-<img alt="Hardware Lab" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1WW6EB18O0ZVOSm3s1Jyq0g00oZXXeaeYFqKAUcAqYULtTnhtyqIfb0xU7Na5iWnH_PZwt96PoW21hgkpeJu0ZKuEylKSPWPBZQptBs3-9jlei9tSrKJPaTEUkE2th4o1jQemsGrUqa9NnDVJaodqpmKp1Na5_nIZkY_GWpDxgCBcyQ_J919iLDVBjVfQVdqw0nI7aI9n-E9HHzvHD66zljc1Jf8GkQAeJdFzY7SRXsCGLPLeWpFvbkmEeG" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
-<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">HARDWARE</span>
-<h3 class="font-headline-md text-white text-lg">Hardware &amp; Soldering Lab</h3>
-</div>
-</div>
-</div>
-<!-- Project Card 3 -->
-<div class="group relative overflow-hidden rounded-2xl p-1 bg-gradient-to-br from-[#0088CC] to-[#021B3B] cursor-pointer interactive magnetic gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">
-<div class="relative aspect-video overflow-hidden rounded-xl bg-surface-container img-mask">
-<img alt="PCB Render" class="w-full h-full object-cover gs-parallax-img scale-125 origin-center" src="https://lh3.googleusercontent.com/aida/AEtjO1U5acIam4RH73T9IPXqm551_lzwd-arvDnqJGFinpjf-qfIEsYokDLHSvJeOaC7qF86eOQALYyULAdsBAWEBZN44R07_L8oCJ2wR6rvSbQ7CsBxj8KFXiY5UWpsJvyUMgf0-s8mmTMxSpiC0Joe0eZSzEnNVgFKXphdBjLv7Kj1UHE3wS52g48UUhJEW2j9mOhqUzmSeMoFOjcz3EeFzakBi1bETqIuQRTTmCACAHhfBP6-NHf1y4ZN2iTo" style="translate: none; rotate: none; scale: none; transform: translate(0%, 2.2086%) translate3d(0px, 0px, 0px) scale(1.1948, 1.1948);"/>
-<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-<span class="font-label-caps text-[10px] text-secondary-fixed-dim mb-2">DESIGN</span>
-<h3 class="font-headline-md text-white text-lg">3D CAD &amp; KiCad Renders</h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Technical Stack & Expertise Section -->
-<section class="bg-[#000000] py-16 relative z-10 border-t border-gray-800" id="tech-stack">
-<div class="max-w-container-max mx-auto px-gutter">
-<div class="mb-12 text-center">
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-white mb-4 gs-reveal">Technical Stack &amp; Expertise</h2>
-<p class="font-body-md text-gray-400 max-w-2xl mx-auto gs-reveal">A comprehensive overview of my hardware, software, and systems engineering toolkit.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- Embedded & Hardware -->
-<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#00FF66]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(0,255,102,0.1)]">
-<div class="mb-6 flex items-center gap-4">
-<span class="material-symbols-outlined text-[#00FF66] text-3xl group-hover:scale-110 transition-transform">memory</span>
-<h3 class="text-white font-headline-md text-xl">Embedded &amp; Hardware</h3>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Jetson</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Raspberry Pi</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">ESP32</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Arduino</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Flight Controller Pixhawk</span>
-</div>
-</div>
-<!-- Software & Systems -->
-<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#81c4ff]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(129,196,255,0.1)]">
-<div class="mb-6 flex items-center gap-4">
-<span class="material-symbols-outlined text-[#81c4ff] text-3xl group-hover:scale-110 transition-transform">terminal</span>
-<h3 class="text-white font-headline-md text-xl">Software &amp; Systems</h3>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Python</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">C++</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Linux</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Computer Vision</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">ROS2 (Fusion)</span>
-</div>
-</div>
-<!-- Design & Workflow -->
-<div class="bg-[#050505]/80 backdrop-blur-sm border border-gray-800 hover:border-[#003594]/50 rounded-2xl p-8 transition-colors duration-300 interactive magnetic gs-reveal group shadow-[0_0_15px_rgba(0,0,0,0)] hover:shadow-[0_0_20px_rgba(0,53,148,0.2)]">
-<div class="mb-6 flex items-center gap-4">
-<span class="material-symbols-outlined text-[#81c4ff] text-3xl group-hover:scale-110 transition-transform">architecture</span>
-<h3 class="text-white font-headline-md text-xl">Design &amp; Workflow</h3>
-</div>
-<div class="flex flex-wrap gap-2">
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">PCB Design</span>
-<span class="px-3 py-1 bg-gray-900 border border-gray-800 text-gray-300 rounded-full text-xs font-mono">Team Collaboration</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- TIER 1: Personal Microtabs -->
-<section class="bg-[#0B0F19] py-16 text-center relative z-10" id="contact">
-<div class="max-w-container-max mx-auto px-gutter flex flex-col items-center">
-<h3 class="text-white text-2xl md:text-3xl font-medium mb-8 max-w-3xl kinetic-text"><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: center; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">Engineering</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">autonomous</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">systems</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">with</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">precision,</div></div></div><div class="line-mask" style="overflow: hidden;"><div class="line" style="display: block; text-align: center; width: 100%;"><div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">curiosity,</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">and</div> <div class="word" style="display: inline-block; translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);">purpose.</div></div></div></h3><div class="flex flex-wrap justify-center gap-3 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
-<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
-<span class="">🌏</span> Bandung, Indonesia
-                    </div>
-<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
-<span class="">🤖</span> Building Roboboats &amp; ROS2 since college
-                    </div>
-<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
-<span class="">☕</span> Powered by coffee &amp; KiCad
-                    </div>
-<div class="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-2 text-white/90 text-sm font-medium">
-<span class="">⚡</span> Hardware &amp; PCB Enthusiast
-                    </div>
-</div>
-</div>
-</section>
-<!-- TIER 2: Giant CTA Footer -->
-<footer class="bg-primary-container text-white pt-24 pb-8 flex flex-col relative z-10">
-<div class="max-w-container-max mx-auto px-gutter w-full flex-grow">
-<!-- Giant CTA -->
-<a class="block group arrow-hover-group mb-16 inline-block interactive magnetic gs-reveal" href="mailto:sabiq.obiq@gmail.com" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
-<h2 class="text-6xl md:text-8xl font-bold tracking-tight hover:opacity-80 transition-opacity">
-                        Say hello <span class="inline-block arrow-icon">↗</span>
-</h2>
-</a>
-<!-- Divider -->
-<hr class="border-white/20 mb-12 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);"/>
-<!-- Metadata -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
-<div>
-<h4 class="font-label-caps text-white/70 mb-4">EMAIL</h4>
-<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="mailto:sabiq.obiq@gmail.com">sabiq.obiq@gmail.com<br/></a>
-</div>
-<div>
-<h4 class="font-label-caps text-white/70 mb-4">ELSEWHERE</h4>
-<div class="flex flex-col gap-2 items-start">
-<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="#">LinkedIn</a>
-<a class="text-xl font-medium hover:opacity-80 transition-opacity interactive magnetic inline-block" href="https://github.com/salamut" target="_blank" rel="noopener noreferrer">GitHub</a>
-</div>
-</div>
-<div>
-<h4 class="font-label-caps text-white/70 mb-4">BASED IN</h4>
-<p class="text-xl font-medium">Bandung, West Java</p>
-</div>
-</div>
-<!-- Bottom Bar -->
-<div class="flex flex-col md:flex-row justify-between items-center text-sm font-medium text-white/80 gs-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; visibility: hidden; transform: translate(0px, 30px);">
-<div class="">© 2026 Sabiq Muttaqin</div>
-<div class="mt-4 md:mt-0 font-label-caps tracking-widest text-xs">DESIGNED AND BUILT WITH PRECISION</div>
-</div>
-</div>
-</footer>
-</main>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <script>
-        // --- 1. Init Lenis Smooth Scroll ---
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
+tailwind.config = {
+  theme: { extend: { colors: {
+    paper: '#F5F2EC', 'paper-2': '#EBE7DE', ink: '#1A1A1A',
+    'ink-2': '#4A4741', 'ink-3': '#8A857A', line: '#D4CFC4', accent: '#C8461F'
+  }}}
+};
+</script>
+
+<!-- Motion + theme resolved before first paint: no flash of the wrong theme,
+     no flash of reveal start-states. 'theme-ready' is added a frame later so
+     the 400ms colour transition never runs on the initial paint. -->
+<script>
+(function () {
+  var d = document.documentElement;
+  try {
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      d.classList.add('js-anim');
+    }
+  } catch (e) {}
+  var theme = 'light';
+  try {
+    var stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') theme = stored;
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+  } catch (e) {}
+  d.setAttribute('data-theme', theme);
+})();
+</script>
+
+<style>
+/* ==========================================================
+   TOKENS
+   ========================================================== */
+:root{
+  /* ---- LIGHT THEME (defaults) ---- */
+  --paper:#F5F2EC;
+  --paper-2:#EBE7DE;
+  --ink:#1A1A1A;
+  --ink-2:#4A4741;
+  --ink-3:#8A857A;
+  --line:#D4CFC4;
+  --accent:#C8461F;
+
+  --surface-nav:rgba(245,242,236,0.72);
+  --shadow-capsule:0 8px 24px -12px rgba(26,26,26,0.18), 0 2px 6px -2px rgba(26,26,26,0.08);
+
+  /* The veil behind the contact section. Light: paper -> ink.
+     Dark: paper -> paper-2 (a lift, not a second darkening). */
+  --veil-color:var(--ink);
+  --surface-nav-veil:rgba(26,26,26,0.72);
+
+  /* Text sitting ON the veil. The veil is dark in BOTH themes, so these
+     are cream in both — this is what makes .on-dark theme-agnostic. */
+  --on-veil-text:#F5F2EC;
+  --on-veil-text-2:rgba(245,242,236,0.78);
+  --on-veil-text-3:rgba(245,242,236,0.62);
+  --on-veil-line:rgba(245,242,236,0.28);
+  --on-veil-underline:rgba(245,242,236,0.30);
+
+  --spot-color:rgba(255,255,255,0.14);
+
+  --maxw:1360px;
+  --gutter:32px;
+  --gap:24px;
+  --sect:160px;
+
+  --ease:cubic-bezier(0.22,1,0.36,1);
+
+  --f-display:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
+  --f-body:'Inter Tight','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+/* ---- DARK THEME ---- */
+[data-theme="dark"]{
+  --paper:#0F0E0C;
+  --paper-2:#1A1815;
+  --ink:#F0EBE0;
+  --ink-2:#B8B2A4;
+  --ink-3:#6E685C;
+  --line:rgba(240,235,224,0.10);
+  --accent:#E56A3A;
+
+  --surface-nav:rgba(15,14,12,0.72);
+  --shadow-capsule:0 8px 24px -12px rgba(0,0,0,0.6), 0 2px 6px -2px rgba(0,0,0,0.4);
+
+  --veil-color:var(--paper-2);
+  --surface-nav-veil:rgba(15,14,12,0.72);
+
+  --on-veil-text:#F0EBE0;
+  --on-veil-text-2:rgba(240,235,224,0.78);
+  --on-veil-text-3:rgba(240,235,224,0.62);
+  --on-veil-line:rgba(240,235,224,0.28);
+  --on-veil-underline:rgba(240,235,224,0.30);
+
+  --spot-color:rgba(240,235,224,0.10);
+}
+
+@media (max-width:767px){ :root{ --gutter:20px; --sect:96px; } }
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+::selection{ background:var(--accent); color:var(--paper); }
+::-moz-selection{ background:var(--accent); color:var(--paper); }
+
+/* ==========================================================
+   THEME TRANSITION
+   Zero-specificity :where() wrapper so any element that declares its own
+   transition keeps it untouched. Colour properties only — transitioning
+   transform/opacity here would fight every ScrollTrigger animation.
+   Gated on .theme-ready so it cannot fire during the first paint.
+   ========================================================== */
+/* View Transitions drives the theme cross-fade natively where supported;
+   running the CSS transition too would double-animate. */
+::view-transition-old(root),
+::view-transition-new(root){
+  animation-duration:500ms;
+  animation-timing-function:cubic-bezier(0.22,1,0.36,1);
+}
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-old(root),
+  ::view-transition-new(root){ animation:none; }
+}
+
+@media (prefers-reduced-motion:no-preference){
+  :where(html.theme-ready:not(.vt-supported)) :where(body, body *){
+    transition:background-color 400ms var(--ease),
+               color 400ms var(--ease),
+               border-color 400ms var(--ease),
+               text-decoration-color 400ms var(--ease);
+  }
+}
+
+/* overflow-x:clip instead of hidden — hidden would break the sticky About column */
+html{ font-size:16px; -webkit-text-size-adjust:100%; overflow-x:clip; }
+
+html body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:1rem;
+  line-height:1.55;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Local reset so the page does not depend on Tailwind's preflight loading. */
+html body h1, html body h2, html body h3,
+html body p, html body ul, html body table, html body figure{ margin:0; }
+
+/* ==========================================================
+   TYPE PRIMITIVES
+   ========================================================== */
+.display{
+  font-family:var(--f-display);
+  font-variation-settings:"opsz" 144,"SOFT" 100;
+  font-weight:400;
+  letter-spacing:-.02em;
+  line-height:1.05;
+}
+.display--md{ font-variation-settings:"opsz" 48,"SOFT" 75; }
+/* Body-size Fraunces: sturdier strokes, less softness. */
+.display--sm{ font-variation-settings:"opsz" 24,"SOFT" 50; }
+.it{ font-style:italic; font-weight:300; }
+
+.h2{
+  font-family:var(--f-display);
+  font-variation-settings:"opsz" 144,"SOFT" 100;
+  font-weight:400;
+  letter-spacing:-.01em;
+  line-height:1.15;
+  font-size:clamp(2.5rem,5.5vw,4.5rem);
+}
+
+.mono{
+  font-family:var(--f-mono);
+  font-weight:400;
+  font-size:.75rem;
+  line-height:1.45;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.mono--label{ letter-spacing:.18em; color:var(--ink-3); }
+.mono--13{ font-size:.8125rem; }
+.mono--11{ font-size:.6875rem; letter-spacing:.14em; }
+
+.body-lg{ font-size:1.125rem; line-height:1.55; color:var(--ink-2); letter-spacing:-.005em; }
+.body-sm{ font-size:.875rem; line-height:1.55; color:var(--ink-2); }
+
+/* ==========================================================
+   LAYOUT
+   ========================================================== */
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.grid12{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:var(--gap); }
+@media (max-width:1023px){ .grid12{ grid-template-columns:repeat(6,minmax(0,1fr)); } }
+@media (max-width:639px){ .grid12{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+.sect{ padding-block:var(--sect); }
+.rule{ height:1px; background:var(--line); border:0; margin:0; width:100%; }
+
+/* Opaque section backgrounds: the ink veil sits behind the page and must
+   only ever show through the contact section. */
+#index, #work, #about{ background:var(--paper); }
+#capabilities{ background:var(--paper-2); }
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; border-radius:2px; }
+
+.skip{
+  position:fixed; top:0; left:0; z-index:200;
+  transform:translateY(-130%);
+  background:var(--ink); color:var(--paper);
+  padding:14px 20px; text-decoration:none;
+  font-family:var(--f-mono); font-size:.75rem;
+  letter-spacing:.16em; text-transform:uppercase;
+  transition:transform .25s var(--ease);
+}
+.skip:focus{ transform:translateY(0); }
+
+.vh{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ==========================================================
+   CURSOR (fine pointer only)
+   ========================================================== */
+#c-dot,#c-ring{ display:none; }
+/* JS only ever positions the cursor when motion is allowed, so keep the
+   elements out of the document entirely under reduced motion — otherwise
+   they park at the top-left corner. */
+@media (prefers-reduced-motion:reduce){ #c-dot,#c-ring{ display:none !important; } }
+
+/* Cursor colour is CSS-only — JS never writes a colour (BUG A/B/E).
+   --cursor-base is the contextual "ink": normal ink on the page, and the
+   veil's opposite on the contact section, in either theme. */
+body{
+  --cursor-base:var(--ink);
+  --cursor-color:var(--cursor-base);
+  --cursor-blend:multiply;
+}
+body.on-dark{ --cursor-base:var(--on-veil-text); }
+/* Multiply hides a cream cursor on a dark ground — screen wherever the
+   ground is dark, i.e. dark theme or on the veil. */
+body.on-dark{ --cursor-blend:screen; }
+[data-theme="dark"] body{ --cursor-blend:screen; }
+
+/* State overrides. Declared after .on-dark so drag wins in every context. */
+body[data-cursor-state="link"]{ --cursor-color:var(--cursor-base); }
+body[data-cursor-state="text"]{ --cursor-color:var(--cursor-base); }
+body[data-cursor-state="image"]{ --cursor-color:var(--cursor-base); }
+body[data-cursor-state="drag"]{ --cursor-color:var(--accent); }
+
+@media (hover:hover) and (pointer:fine){
+  html.cursor-on, html.cursor-on *{ cursor:none !important; }
+
+  #c-dot,#c-ring{
+    position:fixed; top:0; left:0; z-index:150;
+    pointer-events:none; display:block;
+    mix-blend-mode:var(--cursor-blend);
+    transition:border-color 220ms ease, background-color 220ms ease;
+  }
+  #c-dot{ width:5px; height:5px; background-color:var(--cursor-color); border-radius:999px; }
+  #c-ring{
+    width:36px; height:36px; border-radius:999px;
+    border:1px solid var(--cursor-color); background:transparent;
+  }
+  #c-label{
+    position:absolute; top:100%; left:50%;
+    transform:translateX(-50%); margin-top:10px; margin-bottom:0;
+    white-space:nowrap; opacity:0; color:var(--cursor-color);
+    font-family:var(--f-mono); font-size:.625rem;
+    letter-spacing:.16em; text-transform:uppercase;
+    transition:color 220ms ease;
+  }
+  /* P1 — near the bottom edge the label would fall off-screen. */
+  #c-label.label-above{
+    top:auto; bottom:100%;
+    margin-top:0; margin-bottom:10px;
+  }
+  /* Image-hover state: ring gains a centred crosshair. */
+  #c-ring::before{
+    content:'+';
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--f-mono); font-size:.75rem; line-height:1;
+    color:var(--cursor-color); opacity:0;
+    transition:opacity 200ms ease, color 220ms ease;
+  }
+  body[data-cursor-state="image"] #c-ring::before{ opacity:1; }
+}
+
+/* ==========================================================
+   NAV
+   ========================================================== */
+/* The bar itself never moves or paints — .navbar is the thing that morphs
+   from full-width strip into a centred capsule. Colour + blend live on #nav
+   and are swapped instantly (never transitioned) to avoid a mid-morph flash. */
+#nav{
+  position:fixed; inset:0 0 auto 0; z-index:60;
+  color:var(--ink);
+  mix-blend-mode:normal;
+  transition:none;
+}
+#nav.blend{ color:#fff; mix-blend-mode:difference; }
+
+/* The nav's colour flips in the same frame as its blend mode. These
+   elements must therefore opt OUT of the global 400ms colour transition —
+   cross-fading #fff -> ink would wash the text out for 400ms on every
+   scroll past 60px. They declare their own transition (or none) so the
+   zero-specificity theme rule can never reach them. */
+#nav .navlink{ transition:none; }
+#nav .navchip{ transition:none; }
+#nav .monogram{ transition:transform 350ms var(--ease); }
+
+#nav .navbar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; height:72px;
+  margin-top:0;
+  border:1px solid transparent;
+  border-radius:0;
+  background-color:transparent;
+  box-shadow:0 0 0 0 rgba(0,0,0,0);
+  -webkit-backdrop-filter:blur(0px) saturate(1);
+  backdrop-filter:blur(0px) saturate(1);
+  transition:max-width 500ms cubic-bezier(.32,.72,0,1),
+             margin-top 500ms cubic-bezier(.32,.72,0,1),
+             height 500ms cubic-bezier(.32,.72,0,1),
+             padding 500ms cubic-bezier(.32,.72,0,1),
+             gap 500ms cubic-bezier(.32,.72,0,1),
+             border-radius 500ms cubic-bezier(.32,.72,0,1),
+             background-color 500ms cubic-bezier(.32,.72,0,1),
+             border-color 500ms cubic-bezier(.32,.72,0,1),
+             box-shadow 500ms cubic-bezier(.32,.72,0,1),
+             -webkit-backdrop-filter 500ms cubic-bezier(.32,.72,0,1),
+             backdrop-filter 500ms cubic-bezier(.32,.72,0,1);
+}
+
+/* CAPSULE. --capsule-w is measured in JS from the pill's natural content
+   width, so the shrink-to-fit is a real length and therefore animatable
+   (width:max-content is not interpolable). */
+#nav.scrolled .navbar{
+  max-width:min(var(--capsule-w,940px), 940px, calc(100vw - 32px));
+  margin-top:16px;
+  height:56px;
+  padding:8px 12px 8px 20px;
+  gap:16px;
+  border-radius:999px;
+  background-color:var(--surface-nav);
+  border-color:var(--line);
+  box-shadow:var(--shadow-capsule);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  backdrop-filter:blur(20px) saturate(1.4);
+}
+#nav.scrolled .navlinks{ gap:20px; }
+
+/* Monogram lifts on hover of the whole bar — capsule state only. */
+#nav.scrolled:hover .monogram{ transform:scale(1.05); }
+
+/* On the veil: the pill stays a pill, only its tokens flip. The veil is
+   dark in both themes, so this one rule covers light and dark. */
+#nav.on-dark{ color:var(--on-veil-text); mix-blend-mode:normal; }
+#nav.on-dark .navbar{
+  background-color:var(--surface-nav-veil);
+  border-color:var(--on-veil-line);
+}
+
+/* Measurement pass must never paint a transition. */
+#nav.measuring .navbar{ transition:none !important; }
+
+@media (prefers-reduced-motion:reduce){
+  #nav .navbar{ transition:none; }
+  #nav.scrolled .monogram{ transition:none; }
+  #nav.scrolled:hover .monogram{ transform:none; }
+}
+
+.monogram{
+  font-family:var(--f-mono); font-size:.875rem; letter-spacing:.1em;
+  color:inherit; text-decoration:none;
+  display:inline-flex; align-items:center; min-height:44px; padding-inline:4px;
+}
+.navlinks{
+  display:flex; align-items:center; gap:28px;
+  transition:gap 500ms cubic-bezier(.32,.72,0,1);
+}
+@media (prefers-reduced-motion:reduce){ .navlinks{ transition:none; } }
+.navlink{
+  position:relative; color:inherit; text-decoration:none;
+  display:inline-flex; align-items:center; min-height:44px; padding-inline:2px;
+  font-family:var(--f-mono); font-size:.75rem;
+  text-transform:uppercase; letter-spacing:.16em;
+}
+.navlink::after{
+  content:''; position:absolute; left:0; right:0; bottom:13px; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:left;
+  transition:transform .3s var(--ease);
+}
+#nav.scrolled .navlink::after{ background:var(--accent); }
+.navlink:hover::after,.navlink:focus-visible::after{ transform:scaleX(1); }
+
+.navchip{
+  font-family:var(--f-mono); font-size:.6875rem;
+  letter-spacing:.14em; text-transform:uppercase;
+  border:1px solid currentColor; border-radius:2px;
+  padding:7px 10px; opacity:.85; white-space:nowrap;
+}
+/* Chip: hidden below 960 in the strip, and below 1200 in the capsule so the
+   pill never grows unwieldy. */
+@media (max-width:960px){ .navchip{ display:none; } }
+@media (max-width:1199px){ #nav.scrolled .navchip{ display:none; } }
+@media (max-width:560px){ .navlinks{ gap:16px; } .navlink{ font-size:.6875rem; letter-spacing:.1em; } }
+
+/* ---- THEME TOGGLE ---- */
+.theme-toggle{
+  position:relative; flex:none;
+  width:36px; height:36px; padding:0;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:999px;
+  background:transparent;
+  color:inherit;
+  border:1px solid currentColor;
+  border-color:color-mix(in srgb, currentColor 30%, transparent);
+  cursor:pointer;
+  transition:background-color 250ms var(--ease);
+}
+/* 36px visual, 44px hit target. */
+.theme-toggle::before{ content:''; position:absolute; inset:-4px; border-radius:999px; }
+.theme-toggle:hover{ background-color:color-mix(in srgb, currentColor 6%, transparent); }
+.ticon{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  will-change:transform,opacity;
+}
+.ticon svg{ display:block; }
+.ticon-moon{ opacity:0; transform:scale(.6); }
+[data-theme="dark"] .ticon-sun{ opacity:0; transform:scale(.6); }
+[data-theme="dark"] .ticon-moon{ opacity:1; transform:scale(1); }
+
+/* ---- CAPSULE ON MOBILE ----
+   Links stay visible, so the pill has to actually fit them at 375px. */
+@media (max-width:639px){
+  #nav.scrolled .navbar{
+    max-width:calc(100vw - 32px);
+    margin-top:12px;
+    height:52px;
+    padding:6px 8px 6px 16px;
+    gap:10px;
+  }
+  #nav.scrolled .navlinks{ gap:12px; }
+}
+@media (max-width:400px){
+  #nav.scrolled .navlinks{ gap:8px; }
+  #nav.scrolled .navlink{ font-size:.625rem; letter-spacing:.06em; }
+  #nav.scrolled .navbar{ padding:6px 6px 6px 12px; gap:8px; }
+}
+
+/* ==========================================================
+   VEIL — scrubbed paper-to-ink transition behind contact
+   ========================================================== */
+#veil{
+  position:fixed; inset:0; z-index:-1;
+  background:var(--veil-color); opacity:0; pointer-events:none;
+}
+
+/* ==========================================================
+   MASK-REVEAL PRIMITIVE
+   ========================================================== */
+.mline{ display:block; overflow:hidden; padding-bottom:.14em; }
+.mline > span{ display:block; will-change:transform; }
+.js-anim .mline > span{ transform:translateY(125%); }
+
+/* Start-states, mirrored exactly by the timelines below. */
+.js-anim [data-reveal],
+.js-anim [data-hero="1"],
+.js-anim [data-hero="3"],
+.js-anim .hero-links > *,
+.js-anim [data-hero="5"],
+.js-anim .portrait-cap,
+.js-anim #scrollcue{ opacity:0; }
+.js-anim .caprow .draw{ transform:scaleX(0); }
+
+/* ==========================================================
+   01 — HERO
+   ========================================================== */
+#hero{
+  min-height:100vh; min-height:100svh;
+  display:flex; align-items:center;
+  padding-block:136px 72px;
+  position:relative;
+}
+#hero .grid12{ align-items:center; row-gap:64px; }
+
+.hero-left{ grid-column:span 7; }
+.hero-right{ grid-column:span 5; }
+@media (max-width:1023px){
+  .hero-left{ grid-column:span 6; }
+  .hero-right{ grid-column:span 6; }
+}
+@media (max-width:639px){ .hero-left,.hero-right{ grid-column:span 2; } }
+
+.hero-name{
+  font-size:clamp(4.5rem,11vw,10.5rem);
+  line-height:.95;
+  letter-spacing:-.03em;
+  margin-top:32px;
+}
+.hero-name .accent{ color:var(--accent); }
+
+.hero-copy{ max-width:480px; margin-top:40px; }
+.hero-links{ display:flex; flex-wrap:wrap; gap:40px; margin-top:40px; }
+
+.alink{
+  position:relative; display:inline-flex; align-items:center; gap:.6em;
+  min-height:44px; padding-block:12px;
+  color:var(--ink); text-decoration:none;
+  font-family:var(--f-mono); font-size:.75rem;
+  text-transform:uppercase; letter-spacing:.16em;
+}
+.alink::after{
+  content:''; position:absolute; left:0; right:0; bottom:9px;
+  height:1px; background:var(--line);
+  transition:height .3s var(--ease),background-color .3s var(--ease);
+}
+.alink:hover::after,.alink:focus-visible::after{ height:2px; background:var(--accent); }
+.alink svg{ color:var(--accent); transition:transform .3s var(--ease); }
+.alink[data-arrow="down"]:hover svg,
+.alink[data-arrow="down"]:focus-visible svg{ transform:translateY(4px); }
+.alink[data-arrow="ne"]:hover svg,
+.alink[data-arrow="ne"]:focus-visible svg{ transform:translate(4px,-4px); }
+
+.metastrip{
+  display:flex; flex-wrap:wrap; align-items:center; gap:14px;
+  margin-top:72px; color:var(--ink-3);
+}
+.metastrip .bar{ opacity:.55; }
+
+/* ---- BLUR-UP IMAGE REVEAL ----
+   Transform ownership is split by layer so nothing ever competes for the
+   same transform string: the frame clips, .img-sway / .portrait-3d are
+   owned exclusively by GSAP (hover + parallax), and the <img> itself is
+   owned exclusively by CSS (the load reveal). */
+.img-frame{
+  position:relative; overflow:hidden;
+  background:var(--paper-2);
+}
+.img-frame img{
+  opacity:0;
+  filter:blur(16px);
+  transform:scale(1.06);
+  transition:opacity 800ms cubic-bezier(0.22,1,0.36,1),
+             filter 800ms cubic-bezier(0.22,1,0.36,1),
+             transform 1000ms cubic-bezier(0.22,1,0.36,1);
+}
+.img-frame img.is-loaded{
+  opacity:1;
+  filter:blur(0);
+  transform:scale(1);
+}
+/* Reduced motion: images still resolve, they just fade rather than
+   blur-and-scale in. */
+@media (prefers-reduced-motion:reduce){
+  .img-frame img{
+    filter:none; transform:none;
+    transition:opacity 300ms linear;
+  }
+  .img-frame img.is-loaded{ filter:none; transform:none; }
+}
+
+.portrait{
+  position:relative; overflow:hidden;
+  aspect-ratio:4/5; width:100%;
+  background:var(--paper-2);
+  perspective:1200px;
+}
+/* Oversized so a 6deg tilt plus the -40px scroll parallax never exposes
+   an edge of the frame. */
+.portrait-3d{
+  position:absolute; left:-4%; top:-8%;
+  width:108%; height:116%;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.portrait img{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  object-position:center 58%;
+}
+.portrait .spotlight{
+  position:absolute; inset:0; z-index:3;
+  pointer-events:none; opacity:0;
+  mix-blend-mode:overlay;
+  background:radial-gradient(600px circle at var(--sx,50%) var(--sy,50%),
+             var(--spot-color), transparent 40%);
+  transition:opacity 400ms var(--ease);
+}
+.portrait .mask{ display:none; position:absolute; inset:0; z-index:4; background:var(--paper); }
+.js-anim .portrait .mask{ display:block; }
+.portrait-cap{ margin-top:16px; text-align:right; color:var(--ink-3); }
+
+#scrollcue{
+  position:absolute; right:var(--gutter); bottom:40px;
+  display:flex; align-items:center; gap:10px; color:var(--ink-3);
+}
+@media (max-width:1023px){ #scrollcue{ display:none; } }
+
+/* ==========================================================
+   02 — WORK GALLERY
+   ========================================================== */
+.work-head{ display:flex; align-items:baseline; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.work-h2{ margin-top:48px; }
+
+#hstrip{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  display:flex; flex-direction:column; justify-content:center;
+  margin-top:88px;
+}
+#htrack{
+  display:flex; gap:48px; align-items:flex-start;
+  width:max-content;            /* keeps scrollWidth honest for the pin maths */
+  will-change:transform;
+}
+.spacer{ flex:0 0 20vw; }
+
+.gcard{
+  flex:0 0 clamp(320px,46vh,520px);
+  width:clamp(320px,46vh,520px);
+}
+.gcard .img-frame{ width:100%; aspect-ratio:4/3; }
+/* Inset negatively so scale(1.06) + a 14px sway can never reveal an edge,
+   even on the narrowest (300px) card. */
+.gcard .img-sway{
+  position:absolute; inset:-16px;
+  will-change:transform;
+}
+.gcard img{
+  display:block; width:100%; height:100%;
+  object-fit:cover; background:var(--paper-2);
+}
+.gcap{ margin-top:24px; opacity:.4; transition:opacity .4s var(--ease); }
+.gcard.is-active .gcap{ opacity:1; }
+.gcard:hover .gcap,
+.gcard:focus-within .gcap{ opacity:1; }
+.gcap .num{ color:var(--ink-3); }
+.gcap .title{ margin:12px 0 8px; font-size:1.5rem; font-variation-settings:"opsz" 144,"SOFT" 100; }
+.gcap .desc{ max-width:440px; }
+
+/* Technical figures (RTK plots, CAD renders) are contained, not cropped —
+   they carry axes and geometry that a cover-crop would cut off. The padding
+   keeps them clear of the .img-sway bleed. No filter here: the blur-up
+   reveal owns the filter property on these images. */
+.is-figure{
+  object-fit:contain;
+  padding:28px;
+  background:#F2EFE9;
+}
+[data-theme="dark"] .is-figure{ background:#E8E4DC; }
+
+/* Honest stand-in where no real photograph exists yet.
+   Currently UNUSED — every card has a real photo. Kept for the next project
+   card added before its photo exists: drop a .gplate div into .img-sway. */
+.gplate{
+  position:absolute; inset:16px;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+}
+.gplate-mark{
+  font-family:var(--f-display);
+  font-variation-settings:"opsz" 144,"SOFT" 100;
+  font-size:2.75rem; line-height:1;
+  letter-spacing:-.02em; color:var(--ink-3);
+}
+.gplate-note{
+  font-family:var(--f-mono); font-size:.625rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+
+.gtags{
+  list-style:none; margin:16px 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:6px;
+}
+.gtags li{
+  font-family:var(--f-mono); font-size:.625rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3);
+  border:1px solid var(--line); border-radius:2px;
+  padding:4px 8px;
+}
+
+.gh-link{
+  position:relative;
+  display:inline-flex; align-items:center; gap:.5em;
+  min-height:44px; padding-block:12px; margin-top:6px;
+  font-family:var(--f-mono); font-size:.6875rem;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink); text-decoration:none;
+}
+.gh-link::after{
+  content:''; position:absolute; left:0; right:0; bottom:10px; height:1px;
+  background:var(--line);
+  transition:height .3s var(--ease), background-color .3s var(--ease);
+}
+.gh-link:hover::after,.gh-link:focus-visible::after{ height:2px; background:var(--accent); }
+.gh-link svg{ color:var(--accent); transition:transform .3s var(--ease); }
+.gh-link:hover svg,.gh-link:focus-visible svg{ transform:translate(3px,-3px); }
+
+#hprogress{ position:absolute; left:0; right:0; bottom:44px; pointer-events:none; }
+#hprogress .track{ position:relative; height:1px; background:var(--line); }
+#hprogress .fill{ position:absolute; inset:0; background:var(--ink); transform:scaleX(0); transform-origin:left; }
+#hprogress .row{ display:flex; justify-content:space-between; align-items:center; margin-top:14px; color:var(--ink-3); }
+#hhint{ opacity:0; }
+
+/* Native horizontal scroll fallback (mobile / reduced motion) */
+#hstrip.native{
+  height:auto;
+  overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding-bottom:8px;
+}
+#hstrip.native::-webkit-scrollbar{ display:none; }
+#hstrip.native #htrack{ transform:none !important; padding-inline:var(--gutter); }
+#hstrip.native #hprogress{ display:none; }
+#hstrip.native .spacer{ display:none; }
+#hstrip.native .gcard{ flex-basis:320px; width:320px; scroll-snap-align:center; }
+#hstrip.native .gcap{ opacity:1; }
+
+@media (max-width:1023px){ #htrack{ gap:32px; } #hstrip{ margin-top:56px; } }
+
+/* ==========================================================
+   03 — CAPABILITIES
+   ========================================================== */
+.cap-body{ margin-top:88px; row-gap:56px; }
+.cap-quote{ grid-column:span 4; }
+.cap-list{ grid-column:span 8; }
+@media (max-width:1023px){ .cap-quote{ grid-column:span 6; } .cap-list{ grid-column:span 6; } }
+@media (max-width:639px){ .cap-quote,.cap-list{ grid-column:span 2; } }
+
+.cap-quote-text{ font-size:1.5rem; line-height:1.35; max-width:26ch; }
+
+.caprow{
+  position:relative;
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:24px; flex-wrap:wrap;
+  padding-block:30px;
+}
+.cap-list .capgroup:first-child .caprow{ border-top:1px solid var(--line); }
+.caprow .name{ font-size:1.25rem; }
+.caprow .tags{ color:var(--ink-2); text-align:right; }
+.caprow .draw{
+  position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:var(--line); transform-origin:left;
+}
+@media (max-width:639px){ .caprow .tags{ text-align:left; } }
+
+/* ==========================================================
+   04 — ABOUT
+   ========================================================== */
+#about .grid12{ row-gap:72px; }
+.about-left{ grid-column:span 5; }
+.about-right{ grid-column:span 7; }
+@media (min-width:1024px){ .about-left{ position:sticky; top:8rem; align-self:start; } }
+@media (max-width:1023px){ .about-left{ grid-column:span 6; } .about-right{ grid-column:span 6; } }
+@media (max-width:639px){ .about-left,.about-right{ grid-column:span 2; } }
+
+.metatable{
+  width:100%; border-collapse:collapse;
+  margin-top:56px;
+  font-family:var(--f-mono); font-size:.8125rem;
+  border-top:1px solid var(--line);
+}
+.metatable tr{ border-bottom:1px solid var(--line); }
+.metatable th,.metatable td{ padding-block:12px; vertical-align:middle; text-align:left; }
+.metatable th{
+  width:40%; font-weight:400; color:var(--ink-3);
+  text-transform:uppercase; letter-spacing:.16em;
+}
+.metatable td{ color:var(--ink); letter-spacing:.02em; }
+.metatable a{
+  color:inherit;
+  display:inline-flex; align-items:center; min-height:44px;
+  text-decoration:underline; text-decoration-color:var(--line);
+  text-underline-offset:4px; text-decoration-thickness:1px;
+  transition:text-decoration-color .3s var(--ease);
+}
+.metatable a:hover{ text-decoration-color:var(--accent); }
+
+.about-copy{ max-width:560px; }
+.about-copy p{ font-size:1.125rem; line-height:1.65; color:var(--ink-2); margin-bottom:32px; }
+.about-sign{ margin-top:48px; color:var(--ink-3); }
+
+/* ==========================================================
+   05 — CONTACT
+   ========================================================== */
+#contact{
+  background:var(--veil-color);
+  color:var(--on-veil-text);
+  min-height:100vh; min-height:100svh;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding-block:112px 44px;
+  position:relative;
+}
+#contact .mono--label{ color:var(--on-veil-text-3); }
+
+.contact-top{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.availchip{
+  display:inline-flex; align-items:center; gap:10px;
+  border:1px solid var(--on-veil-line); border-radius:2px;
+  padding:8px 12px; color:var(--on-veil-text-2);
+}
+.pulse{ width:7px; height:7px; border-radius:999px; background:var(--accent); flex:none; }
+@media (prefers-reduced-motion:no-preference){ .pulse{ animation:pulse 2.4s var(--ease) infinite; } }
+@keyframes pulse{
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.35; transform:scale(.72); }
+}
+
+.cta{
+  display:block; text-align:center; text-decoration:none;
+  color:var(--on-veil-text);
+  font-family:var(--f-display);
+  font-variation-settings:"opsz" 144,"SOFT" 100;
+  font-style:italic; font-weight:300;
+  font-size:clamp(4.5rem,16vw,15rem);
+  line-height:.9;
+  letter-spacing:0;
+  margin-block:96px;
+  transition:letter-spacing .5s var(--ease);
+}
+.cta:hover,.cta:focus-visible{ letter-spacing:-.03em; }
+.cta .arrow{
+  color:var(--accent);
+  width:.46em; height:.46em;
+  vertical-align:-.02em;
+  transition:transform .35s var(--ease);
+}
+.cta:hover .arrow,.cta:focus-visible .arrow{ transform:translate(4px,-4px); }
+@media (max-width:639px){ .cta{ margin-block:64px; } }
+
+.contact-cols{ row-gap:48px; }
+.contact-col{ grid-column:span 4; }
+@media (max-width:1023px){ .contact-col{ grid-column:span 6; } }
+@media (max-width:639px){ .contact-col{ grid-column:span 2; } }
+.contact-col h3{ margin-bottom:12px; }
+.contact-col ul{ list-style:none; padding:0; }
+.contact-col li{ color:var(--on-veil-text-2); font-size:.9375rem; max-width:30ch; }
+.contact-col a{
+  color:var(--on-veil-text);
+  display:inline-flex; align-items:center; gap:.4em; min-height:44px;
+  text-decoration:underline; text-decoration-color:var(--on-veil-underline);
+  text-underline-offset:4px; text-decoration-thickness:1px;
+  transition:text-decoration-color .3s var(--ease);
+}
+.contact-col a:hover{ text-decoration-color:var(--accent); }
+
+/* ---- CLICK-TO-COPY CHIP ---- */
+.copy-chip{
+  position:relative;
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--f-mono); font-size:.6875rem;
+  letter-spacing:.16em; text-transform:uppercase;
+  padding:6px 10px;
+  border:1px solid var(--line); border-radius:999px;
+  background:transparent; color:var(--ink-3);
+  cursor:pointer;
+  transition:color 220ms var(--ease), border-color 220ms var(--ease), background-color 220ms var(--ease);
+  vertical-align:middle;
+}
+/* 29px visual, >=44px hit target — matches the theme toggle's approach. */
+.copy-chip::before{ content:''; position:absolute; inset:-8px -6px; border-radius:999px; }
+.copy-chip:hover{ color:var(--ink); border-color:var(--ink); }
+.copy-chip.is-copied{ color:var(--accent); border-color:var(--accent); }
+/* On the veil the chip needs the veil palette, not the page palette. */
+#contact .copy-chip{ color:var(--on-veil-text-3); border-color:var(--on-veil-line); }
+#contact .copy-chip:hover{ color:var(--on-veil-text); border-color:var(--on-veil-text); }
+#contact .copy-chip.is-copied{ color:var(--accent); border-color:var(--accent); }
+.metatable td .copy-chip{ margin-left:10px; }
+.contact-col .copy-chip{ margin-left:8px; }
+
+.contact-bottom{
+  display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  margin-top:112px;
+  color:var(--on-veil-text-3);
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div id="veil" aria-hidden="true"></div>
+<div id="c-ring" aria-hidden="true"><span id="c-label"></span></div>
+<div id="c-dot" aria-hidden="true"></div>
+
+<header id="nav">
+  <div class="wrap navbar">
+    <a class="monogram" href="#index" data-magnetic>SM</a>
+    <nav class="navlinks" aria-label="Primary">
+      <a class="navlink" href="#index" data-magnetic>Index</a>
+      <a class="navlink" href="#work" data-magnetic>Work</a>
+      <a class="navlink" href="#about" data-magnetic>About</a>
+      <a class="navlink" href="#contact" data-magnetic>Contact</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button"
+            aria-label="Switch to dark mode" aria-pressed="false" data-magnetic>
+      <span class="ticon ticon-sun" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M6.5 6.5 4.9 4.9M19.1 19.1l-1.6-1.6M17.5 6.5l1.6-1.6M4.9 19.1l1.6-1.6"/>
+        </svg>
+      </span>
+      <span class="ticon ticon-moon" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.5 14.3A8.6 8.6 0 0 1 9.7 3.5a8.6 8.6 0 1 0 10.8 10.8Z"/>
+        </svg>
+      </span>
+    </button>
+    <span class="navchip">Bandung · <span data-clock>--:--</span></span>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================
+       01 — BIODATA HERO
+       ============================================================ -->
+  <section id="index" aria-labelledby="hero-title">
+    <div id="hero">
+      <div class="wrap grid12">
+
+        <div class="hero-left">
+          <p class="mono mono--label" data-hero="1">01 / Introducing</p>
+
+          <h1 id="hero-title" class="display hero-name">
+            <span class="mline" data-hero="2"><span>Sabiq</span></span>
+            <span class="mline" data-hero="2"><span class="accent">Muttaqin,</span></span>
+            <span class="mline" data-hero="2"><span class="it">engineer.</span></span>
+          </h1>
+
+          <p class="body-lg hero-copy" data-hero="3">
+            Robotics and electrical engineer specializing in ROS2, autonomous systems,
+            and custom PCB design. I build reliable, machine-grade solutions from
+            schematic to physical deployment — currently based in Bandung, Indonesia.
+          </p>
+
+          <div class="hero-links">
+            <a class="alink" href="#work" data-arrow="down" data-magnetic>
+              View work
+              <svg width="12" height="13" viewBox="0 0 12 13" fill="none" aria-hidden="true">
+                <path d="M6 0.5v11M1.5 7.5 6 12l4.5-4.5" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </a>
+            <a class="alink" href="#contact" data-arrow="ne" data-magnetic>
+              Get in touch
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </a>
+          </div>
+
+          <p class="mono metastrip" data-hero="5">
+            <span>Available for full-time</span><span class="bar" aria-hidden="true">|</span>
+            <span>Bandung, ID</span><span class="bar" aria-hidden="true">|</span>
+            <span>GMT+07</span><span class="bar" aria-hidden="true">|</span>
+            <span>Est. 2024</span>
+          </p>
+        </div>
+
+        <div class="hero-right">
+          <!-- Real portrait. object-position lifts the face out of dead centre
+               because the source frame (9:16) has a lot of headroom; tweak the
+               percentage if you want the crop higher or lower. -->
+          <div class="portrait img-frame" data-cursor="image" data-cursor-label="View">
+            <div class="portrait-3d">
+              <img
+                src="foto%20profil.jpeg"
+                alt="Muhammad Sabiq Almuttaqin"
+                width="900" height="1600" loading="eager" fetchpriority="high" decoding="async">
+            </div>
+            <div class="spotlight" aria-hidden="true"></div>
+            <div class="mask" aria-hidden="true"></div>
+          </div>
+          <p class="mono portrait-cap">Portrait · 2026</p>
+        </div>
+
+      </div>
+
+      <div id="scrollcue" class="mono" aria-hidden="true">
+        <span>Scroll</span>
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none">
+          <path d="M5 0v13M1 9l4 4 4-4" stroke="currentColor" stroke-width="1.1"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============================================================
+       02 — WORK GALLERY
+       ============================================================ -->
+  <section id="work" class="sect" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="work-head">
+        <p class="mono mono--label" data-reveal>02 / Work Gallery</p>
+        <p class="mono mono--label" data-reveal>04 Projects · Scroll sideways →</p>
+      </div>
+      <h2 id="work-title" class="h2 work-h2" data-reveal>
+        Selected work, <span class="it">recent.</span>
+      </h2>
+    </div>
+
+    <div id="hstrip" class="native" tabindex="0" role="region" aria-label="Work gallery, scrolls horizontally">
+      <div id="htrack">
+        <div class="spacer" aria-hidden="true"></div>
+
+        <!-- 01 — Final-year thesis. Real photo of the ASV platform the navigation
+             stack runs on. To show the RTK result plot instead, swap src for:
+             https://raw.githubusercontent.com/salamut/upci_asv/main/data%20gps/trajectory_data6.png
+             and add class="is-figure". -->
+        <article class="gcard" data-cursor="image" data-cursor-label="View">
+          <div class="img-frame">
+            <div class="img-sway">
+              <img src="foto%20kapal%20asv.jpeg"
+                   alt="The autonomous surface vehicle on its stand in the lab: black 3D-printed superstructure with twin antennas and a sensor mast, mounted on a shaped hull."
+                   width="1152" height="864" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="gcap">
+            <p class="mono num">01 — 2026 · Final-Year Thesis</p>
+            <h3 class="display display--sm title">ASV Waypoint Navigation</h3>
+            <p class="body-sm desc">
+              Line-of-Sight guidance with a PID differential-drive controller for a
+              catamaran surface vehicle, running ROS&nbsp;2 Humble over MAVROS to
+              ArduPilot. Verified in Gazebo SITL and with RTK-GPS field logging.
+            </p>
+            <ul class="gtags" aria-label="Technologies">
+              <li>RTK-GPS</li><li>ROS 2</li><li>MAVROS</li><li>ArduPilot</li><li>Python</li>
+            </ul>
+            <a class="gh-link" href="https://github.com/salamut/upci_asv"
+               target="_blank" rel="noopener noreferrer"
+               data-cursor="view" data-cursor-label="Open">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 02 — Competition. Real photo from the KKI event booth. The banner in
+             this photo reads "Kontes Kapal Indonesia" and "uPC Laboratory", which is
+             what ties the upci_asv repository to this competition. -->
+        <article class="gcard" data-cursor="image" data-cursor-label="View">
+          <div class="img-frame">
+            <div class="img-sway">
+              <img src="foto%20lomba%20kki.jpeg"
+                   alt="The team at their Kontes Kapal Indonesia booth, holding a uPC Laboratory banner beside the autonomous vessel and its project poster."
+                   width="1600" height="1201" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="gcap">
+            <p class="mono num">02 — 2026 · Competition</p>
+            <h3 class="display display--sm title">KKI Autonomous Surface Vehicle</h3>
+            <p class="body-sm desc">
+              Led a multidisciplinary team to the national finals in the Autonomous
+              Surface Vehicle category — system architecture, propulsion configuration,
+              autonomous manoeuvring, and integration across electrical, mechanical
+              and software.
+            </p>
+            <ul class="gtags" aria-label="Contributions">
+              <li>Team Leadership</li><li>System Architecture</li><li>ArduPilot</li><li>Gazebo / SITL</li>
+            </ul>
+            <a class="gh-link" href="https://github.com/salamut/upci_asv"
+               target="_blank" rel="noopener noreferrer"
+               data-cursor="view" data-cursor-label="Open">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 03 — Hardware/PCB contribution only. Real field-deployment photo.
+             No repository found on the GitHub account, so no GitHub button. -->
+        <article class="gcard" data-cursor="image" data-cursor-label="View">
+          <div class="img-frame">
+            <div class="img-sway">
+              <img src="padi%20kering.jpeg"
+                   alt="The irrigation control enclosure open in the field, showing the populated board, relay module and mains outlets, with its solar panel and the rice paddies behind."
+                   width="1600" height="900" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="gcap">
+            <p class="mono num">03 — 2025 · Electronics</p>
+            <h3 class="display display--sm title">Smart Irrigation Hardware</h3>
+            <p class="body-sm desc">
+              Designed and fabricated the custom electronics/PCB hardware used in the
+              irrigation system, from schematic and PCB layout through fabrication,
+              assembly, and field deployment at Karang Sambi, Pemalang.
+            </p>
+            <ul class="gtags" aria-label="Technologies">
+              <li>Autodesk EAGLE</li><li>ESP32</li><li>PCB Layout</li><li>Relay Interface</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 04 — Ongoing. Image is a real SOLIDWORKS render from the repository. -->
+        <article class="gcard" data-cursor="image" data-cursor-label="View">
+          <div class="img-frame">
+            <div class="img-sway">
+              <img class="is-figure" src="https://raw.githubusercontent.com/salamut/esp32s3-micro-Skaycopter/main/images/assembly_3d.png"
+                   alt="SOLIDWORKS render of the quadcopter airframe assembly showing four circular prop guards around a central board tray."
+                   width="1693" height="928" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="gcap">
+            <p class="mono num">04 — 2026 · In Development</p>
+            <h3 class="display display--sm title">ESP32-S3 Micro-Quadcopter</h3>
+            <p class="body-sm desc">
+              A 120&nbsp;mm-class educational kit: custom four-layer ESP32-S3 flight
+              controller (66.54&nbsp;×&nbsp;60.66&nbsp;mm) with an MPU-6050 IMU, four
+              brushed motor channels and USB-C charging, plus a script-driven
+              parametric airframe. Firmware and flight control ongoing.
+            </p>
+            <ul class="gtags" aria-label="Technologies">
+              <li>ESP32-S3</li><li>EasyEDA</li><li>MPU-6050</li><li>4-Layer PCB</li><li>SOLIDWORKS</li>
+            </ul>
+            <a class="gh-link" href="https://github.com/salamut/esp32s3-micro-Skaycopter"
+               target="_blank" rel="noopener noreferrer"
+               data-cursor="view" data-cursor-label="Open">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <div class="spacer" aria-hidden="true"></div>
+      </div>
+
+      <div id="hprogress" aria-hidden="true">
+        <div class="wrap">
+          <div class="track"><div class="fill"></div></div>
+          <div class="row mono mono--11">
+            <span id="hindex">01 / 04</span>
+            <span id="hhint">← →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============================================================
+       03 — CAPABILITIES
+       ============================================================ -->
+  <section id="capabilities" class="sect" aria-labelledby="cap-title">
+    <div class="wrap">
+      <p class="mono mono--label" data-reveal>03 / Capabilities</p>
+      <h2 id="cap-title" class="h2" style="margin-top:24px" data-reveal>
+        What I do<span class="it">, precisely.</span>
+      </h2>
+
+      <div class="grid12 cap-body">
+        <div class="cap-quote">
+          <p class="display display--sm cap-quote-text" data-reveal>
+            Hardware that leaves the workbench and stays powered in the field.
+          </p>
+        </div>
+
+        <div class="cap-list">
+          <div class="capgroup">
+            <div class="caprow">
+              <h3 class="display display--sm name">Embedded &amp; Hardware</h3>
+              <p class="mono tags">Jetson · Raspberry Pi · ESP32 · Arduino · Pixhawk</p>
+              <span class="draw" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="capgroup">
+            <div class="caprow">
+              <h3 class="display display--sm name">Software &amp; Systems</h3>
+              <p class="mono tags">Python · C++ · Linux · Computer Vision · ROS2 (Fusion)</p>
+              <span class="draw" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="capgroup">
+            <div class="caprow">
+              <h3 class="display display--sm name">Design &amp; Workflow</h3>
+              <p class="mono tags">PCB Design · Team Collaboration</p>
+              <span class="draw" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ============================================================
+       04 — ABOUT
+       ============================================================ -->
+  <section id="about" class="sect" aria-labelledby="about-title">
+    <div class="wrap grid12">
+
+      <div class="about-left">
+        <p class="mono mono--label" data-reveal>04 / About</p>
+        <h2 id="about-title" class="h2" style="margin-top:24px" data-reveal>
+          The long <span class="it">version.</span>
+        </h2>
+
+        <table class="metatable" data-reveal>
+          <caption class="vh">Profile details</caption>
+          <tbody>
+            <tr><th scope="row">Name</th><td>Muhammad Sabiq Almuttaqin</td></tr>
+            <tr><th scope="row">Role</th><td>Electrical Engineer — Embedded Systems</td></tr>
+            <tr><th scope="row">Based</th><td>Bandung, West Java, Indonesia</td></tr>
+            <tr><th scope="row">Timezone</th><td>GMT+07:00</td></tr>
+            <tr><th scope="row">Focus</th><td>Embedded systems, electronics, automation &amp; control, autonomous systems</td></tr>
+            <tr><th scope="row">Stack</th><td>ROS 2, ArduPilot, Python, C/C++, ESP32, EasyEDA / EAGLE, Git, Linux</td></tr>
+            <tr><th scope="row">Available</th><td>Open to full-time roles</td></tr>
+            <tr><th scope="row">Email</th><td><a href="mailto:sabiq.obiq@gmail.com" data-magnetic data-cursor="view" data-cursor-label="Email">sabiq.obiq@gmail.com</a><button type="button" class="copy-chip" data-copy="sabiq.obiq@gmail.com" aria-label="Copy email address to clipboard"><span class="copy-chip-label" aria-live="polite">Copy</span></button></td></tr>
+            <tr><th scope="row">GitHub</th><td><a href="https://github.com/salamut" target="_blank" rel="noopener noreferrer" data-magnetic data-cursor="view" data-cursor-label="Open">github.com/salamut</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="about-right">
+        <div class="about-copy">
+          <p data-reveal data-dur="0.8">
+            I am a robotics and electrical engineer based in Bandung. My work sits at the
+            intersection of hardware and autonomy — the parts of engineering where a
+            schematic has to become a physical object that survives a real environment.
+          </p>
+          <p data-reveal data-dur="0.8">
+            My focus is ROS 2, autonomous systems, and custom PCB engineering. I have been
+            building roboboats and working with ROS 2 since college, spending most of my time
+            between the EasyEDA canvas and the soldering bench. Every project is a small
+            argument for the same idea: reliable, machine-grade work, from schematic to
+            field deployment.
+          </p>
+          <p data-reveal data-dur="0.8">
+            I take on full-time roles and select consulting engagements in robotics, PCB
+            design, and ROS 2 systems. If you have a problem that needs to leave the bench,
+            I would like to hear about it.
+          </p>
+          <p class="mono about-sign" data-reveal data-dur="0.8">— Powered by coffee &amp; EasyEDA.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       05 — CONTACT
+       ============================================================ -->
+  <section id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-top">
+        <p class="mono mono--label">05 / Contact</p>
+        <span class="mono mono--11 availchip">
+          <span class="pulse" aria-hidden="true"></span>Open to full-time roles
+        </span>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <h2 id="contact-title" class="vh">Contact</h2>
+      <a class="cta" href="mailto:sabiq.obiq@gmail.com" data-cursor="view" data-cursor-label="Email">
+        <span class="mline"><span>Let&rsquo;s build</span></span>
+        <span class="mline"><span>something<svg class="arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 17.5 17.5 6.5M9 6.5h8.5V15" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg></span></span>
+      </a>
+    </div>
+
+    <div class="wrap">
+      <div class="grid12 contact-cols">
+        <div class="contact-col">
+          <h3 class="mono mono--label">Channel</h3>
+          <ul>
+            <li><a href="mailto:sabiq.obiq@gmail.com" data-magnetic>sabiq.obiq@gmail.com</a><button type="button" class="copy-chip" data-copy="sabiq.obiq@gmail.com" aria-label="Copy email address to clipboard"><span class="copy-chip-label" aria-live="polite">Copy</span></button></li>
+            <li><a href="https://github.com/salamut" target="_blank" rel="noopener noreferrer" data-magnetic>github.com/salamut</a></li>
+            <!-- TODO / SWAP: placeholder only — replace with the real LinkedIn
+                 profile URL. Intentionally NOT guessed. -->
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="contact-col">
+          <h3 class="mono mono--label">Location</h3>
+          <ul>
+            <li>Bandung, Indonesia</li>
+            <li>GMT+07:00 · Local <span data-clock>--:--</span></li>
+          </ul>
+        </div>
+        <div class="contact-col">
+          <h3 class="mono mono--label">Response</h3>
+          <ul>
+            <li>Within 48 hours</li>
+            <li>For robotics, PCB design, and ROS 2 systems work.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mono mono--11 contact-bottom">
+        <span>© 2026 Muhammad Sabiq Almuttaqin</span>
+        <span>Designed &amp; built with precision</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CAN_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var root = document.documentElement;
+  var nav = document.getElementById('nav');
+
+  /* --------------------------------------------------------
+     LIVE CLOCK — Asia/Jakarta. Runs regardless of motion pref.
+     -------------------------------------------------------- */
+  var clocks = document.querySelectorAll('[data-clock]');
+  function tick() {
+    var t;
+    try {
+      t = new Date().toLocaleTimeString('en-GB', {
+        hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Jakarta'
+      });
+    } catch (e) {
+      var d = new Date(Date.now() + (7 * 60 + new Date().getTimezoneOffset()) * 60000);
+      t = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+    }
+    for (var i = 0; i < clocks.length; i++) clocks[i].textContent = t;
+  }
+  tick();
+  setInterval(tick, 15000);
+
+  /* --------------------------------------------------------
+     THEME — motion-independent, works with reduced motion.
+     -------------------------------------------------------- */
+  var themeBtn = document.getElementById('theme-toggle');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var sunIcon = themeBtn && themeBtn.querySelector('.ticon-sun');
+  var moonIcon = themeBtn && themeBtn.querySelector('.ticon-moon');
+
+  function currentTheme() {
+    return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+
+  function syncThemeChrome(theme, animateIcons) {
+    var dark = theme === 'dark';
+    if (themeMeta) themeMeta.setAttribute('content', dark ? '#0F0E0C' : '#F5F2EC');
+    if (!themeBtn) return;
+    themeBtn.setAttribute('aria-pressed', String(dark));
+    themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+
+    var incoming = dark ? moonIcon : sunIcon;
+    var outgoing = dark ? sunIcon : moonIcon;
+    if (!incoming || !outgoing) return;
+
+    if (!animateIcons || REDUCED || typeof window.gsap === 'undefined') {
+      if (typeof window.gsap !== 'undefined') {
+        gsap.set(outgoing, { opacity: 0, scale: 0.6 });
+        gsap.set(incoming, { opacity: 1, scale: 1 });
+      }
+      return;
+    }
+    gsap.to(outgoing, { opacity: 0, scale: 0.6, duration: 0.22, ease: 'power2.out' });
+    gsap.fromTo(incoming, { opacity: 0, scale: 0.6 },
+                { opacity: 1, scale: 1, duration: 0.22, ease: 'power2.out' });
+  }
+
+  function applyTheme(theme, animateIcons) {
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem('theme', theme); } catch (e) {}
+    syncThemeChrome(theme, animateIcons);
+    measureCapsule();
+  }
+
+  // View Transitions cross-fades the whole document natively. Where it runs,
+  // the CSS colour transition is switched off (see html:not(.vt-supported))
+  // so the two never double-animate, and icons swap instantly inside the
+  // snapshot rather than tweening invisibly behind it.
+  var USE_VT = !REDUCED && typeof document.startViewTransition === 'function';
+  if (USE_VT) root.classList.add('vt-supported');
+
+  function setTheme(theme, animateIcons) {
+    if (USE_VT) {
+      document.startViewTransition(function () { applyTheme(theme, false); });
+    } else {
+      applyTheme(theme, animateIcons);
+    }
+  }
+
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      setTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+    });
+  }
+
+  // Follow the OS only while the user has not made an explicit choice.
+  try {
+    var osDark = window.matchMedia('(prefers-color-scheme: dark)');
+    var onOsChange = function (e) {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (err) {}
+      if (stored === 'dark' || stored === 'light') return;
+      var next = e.matches ? 'dark' : 'light';
+      if (USE_VT) {
+        document.startViewTransition(function () {
+          root.setAttribute('data-theme', next);
+          syncThemeChrome(next, false);
+        });
+      } else {
+        root.setAttribute('data-theme', next);
+        syncThemeChrome(next, true);
+      }
+    };
+    if (osDark.addEventListener) osDark.addEventListener('change', onOsChange);
+    else if (osDark.addListener) osDark.addListener(onOsChange);
+  } catch (e) {}
+
+  /* --------------------------------------------------------
+     BLUR-UP IMAGE REVEAL — motion-independent (CSS decides whether the
+     reveal blurs or merely fades).
+     -------------------------------------------------------- */
+  var frameImgs = document.querySelectorAll('.img-frame img');
+  function markLoaded(img) { img.classList.add('is-loaded'); }
+  Array.prototype.forEach.call(frameImgs, function (img) {
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded(img);
+    } else {
+      img.addEventListener('load', function () { markLoaded(img); }, { once: true });
+      // A broken image should still resolve rather than sit at opacity 0.
+      img.addEventListener('error', function () { markLoaded(img); }, { once: true });
+    }
+  });
+
+  /* --------------------------------------------------------
+     CLICK-TO-COPY EMAIL — motion-independent.
+     -------------------------------------------------------- */
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    // execCommand fallback for insecure contexts / older engines.
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject();
+    });
+  }
+
+  document.querySelectorAll('.copy-chip').forEach(function (chip) {
+    var labelEl = chip.querySelector('.copy-chip-label');
+    var revert = null;
+    chip.addEventListener('click', function () {
+      var text = chip.getAttribute('data-copy') || '';
+      copyToClipboard(text).then(function () {
+        if (revert) clearTimeout(revert);
+        chip.classList.add('is-copied');
+        if (labelEl) labelEl.textContent = 'Copied ✓';
+        revert = setTimeout(function () {
+          chip.classList.remove('is-copied');
+          if (labelEl) labelEl.textContent = 'Copy';
+          revert = null;
+        }, 1600);
+      }).catch(function () {
+        if (labelEl) labelEl.textContent = 'Press ⌘C';
+        setTimeout(function () { if (labelEl) labelEl.textContent = 'Copy'; }, 1600);
+      });
+    });
+  });
+
+  /* --------------------------------------------------------
+     NAV CAPSULE — motion-independent.
+     The pill shrink-wraps its content, so its natural width is measured
+     and published as --capsule-w: a real length animates, max-content
+     does not.
+     -------------------------------------------------------- */
+  var navbar = nav.querySelector('.navbar');
+  var isCapsule = null;
+  var blendTimer = null;
+
+  function measureCapsule() {
+    if (!navbar) return;
+    var hadScrolled = nav.classList.contains('scrolled');
+    nav.classList.add('measuring', 'scrolled');
+    var prevW = navbar.style.width, prevMax = navbar.style.maxWidth;
+    navbar.style.width = 'max-content';
+    navbar.style.maxWidth = 'none';
+    var w = Math.ceil(navbar.getBoundingClientRect().width);
+    navbar.style.width = prevW;
+    navbar.style.maxWidth = prevMax;
+    if (!hadScrolled) nav.classList.remove('scrolled');
+    // Force a reflow so the restored styles land before transitions resume.
+    void navbar.offsetWidth;
+    nav.classList.remove('measuring');
+    if (w > 0) root.style.setProperty('--capsule-w', w + 'px');
+  }
+
+  function setCapsule(on) {
+    if (on === isCapsule) return;
+    isCapsule = on;
+    if (blendTimer) { clearTimeout(blendTimer); blendTimer = null; }
+
+    if (on) {
+      // Blend off first, capsule paints on the next frame — no flicker.
+      nav.classList.remove('blend');
+      requestAnimationFrame(function () { nav.classList.add('scrolled'); });
+    } else {
+      nav.classList.remove('scrolled');
+      // Blend back on only once the strip has finished expanding, and never
+      // while the contact veil is showing (the pill stays lit there).
+      blendTimer = setTimeout(function () {
+        blendTimer = null;
+        if (!isCapsule && !nav.classList.contains('on-dark')) nav.classList.add('blend');
+      }, REDUCED ? 0 : 500);
+    }
+  }
+
+  function navState() { setCapsule(window.scrollY > 60); }
+
+  syncThemeChrome(currentTheme(), false);
+  measureCapsule();
+
+  // Adopt the correct state on load WITHOUT playing the morph — reloading
+  // mid-page should show a capsule, not animate one into existence.
+  if (window.scrollY > 60) {
+    isCapsule = true;
+    nav.classList.add('measuring', 'scrolled');
+    requestAnimationFrame(function () { nav.classList.remove('measuring'); });
+  } else {
+    isCapsule = false;
+    nav.classList.add('blend');
+  }
+  window.addEventListener('scroll', navState, { passive: true });
+
+  var reMeasure;
+  window.addEventListener('resize', function () {
+    clearTimeout(reMeasure);
+    reMeasure = setTimeout(measureCapsule, 150);
+  }, { passive: true });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(measureCapsule).catch(function () {});
+  }
+
+  // Arm the theme colour transition only after the first paint.
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { root.classList.add('theme-ready'); });
+  });
+
+  // If GSAP never arrived, drop every hidden start-state so the page still reads.
+  if (typeof window.gsap === 'undefined') { root.classList.remove('js-anim'); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* --------------------------------------------------------
+     LENIS
+     -------------------------------------------------------- */
+  var lenis = null;
+  if (!REDUCED && typeof window.Lenis !== 'undefined') {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true
+    });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id === '#' || id === '#main') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(target, { offset: 0 });
+      else target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* --------------------------------------------------------
+     CURSOR — fine pointer, motion allowed
+     -------------------------------------------------------- */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !REDUCED) {
+    var dot = document.getElementById('c-dot');
+    var ring = document.getElementById('c-ring');
+    var label = document.getElementById('c-label');
+
+    var cbody = document.body;
+
+    root.classList.add('cursor-on');
+    // BUG D — start hidden rather than parked off-screen, so nothing flies
+    // in from the corner on the first move.
+    gsap.set([dot, ring], { xPercent: -50, yPercent: -50, opacity: 0 });
+
+    var dotX = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power3' });
+    var dotY = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power3' });
+    var ringX = gsap.quickTo(ring, 'x', { duration: 0.5, ease: 'elastic.out(1, 0.85)' });
+    var ringY = gsap.quickTo(ring, 'y', { duration: 0.5, ease: 'elastic.out(1, 0.85)' });
+
+    var magnet = null;      // element the dot is locked to
+    var releasing = false;  // dot is easing back to the pointer (BUG C)
+    var firstMove = true;   // BUG D
+    var lastX = 0, lastY = 0;
+    var stateTimer = null;  // BUG G
+    var labelAbove = false; // P1
+
+    window.addEventListener('mousemove', function (e) {
+      lastX = e.clientX; lastY = e.clientY;
+      if (firstMove) {
+        firstMove = false;
+        gsap.set([dot, ring], { x: lastX, y: lastY });
+        gsap.to([dot, ring], { opacity: 1, duration: 0.18, ease: 'power2.out' });
+        return;
+      }
+      if (!magnet && !releasing) { dotX(lastX); dotY(lastY); }
+      ringX(lastX); ringY(lastY);
+
+      // P1 — flip the label above the ring near the bottom edge.
+      var above = (window.innerHeight - lastY) < 60;
+      if (above !== labelAbove) {
+        labelAbove = above;
+        label.classList.toggle('label-above', above);
+      }
+    }, { passive: true });
+
+    // BUG F — fade out when the pointer leaves the window entirely.
+    document.addEventListener('mouseleave', function (e) {
+      if (e.target !== document && e.target !== root) return;
+      gsap.to([dot, ring], { opacity: 0, duration: 0.18, ease: 'power2.out' });
+    });
+    document.addEventListener('mouseenter', function (e) {
+      if (e.target !== document && e.target !== root) return;
+      if (firstMove) return;
+      gsap.to([dot, ring], { opacity: 1, duration: 0.18, ease: 'power2.out' });
+    });
+
+    // BUG A/B/E — size and radius only. Colour is entirely CSS-driven.
+    function ringSize(vars) {
+      gsap.to(ring, Object.assign({ duration: 0.35, ease: 'power3.out' }, vars));
+    }
+    // BUG G — clearing is deferred so a fast hop between two targets does
+    // not leave the state attribute stuck or briefly wrong.
+    function setState(state) {
+      if (stateTimer) { clearTimeout(stateTimer); stateTimer = null; }
+      if (state) {
+        cbody.setAttribute('data-cursor-state', state);
+      } else {
+        stateTimer = setTimeout(function () {
+          stateTimer = null;
+          cbody.removeAttribute('data-cursor-state');
+        }, 20);
+      }
+    }
+    function resetRing() {
+      ringSize({ width: 36, height: 36, borderRadius: 999 });
+      gsap.to(label, { opacity: 0, duration: 0.2 });
+      setState(null);
+    }
+
+    function applyCursor(el) {
+      {
+        var kind = el.getAttribute('data-cursor');
+        if (kind === 'drag') {
+          setState('drag');
+          ringSize({ width: 100, height: 100, borderRadius: 999 });
+          label.textContent = 'Drag ← →';
+        } else if (kind === 'image') {
+          setState('image');
+          ringSize({ width: 72, height: 72, borderRadius: 999 });
+          label.textContent = el.getAttribute('data-cursor-label') || 'View';
+        } else {
+          setState('link');
+          ringSize({ width: 88, height: 88, borderRadius: 999 });
+          label.textContent = el.getAttribute('data-cursor-label') || 'View';
+        }
+        gsap.to(label, { opacity: 1, duration: 0.25, delay: 0.05 });
+      }
+    }
+
+    document.querySelectorAll('[data-cursor]').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { applyCursor(el); });
+      el.addEventListener('mouseleave', function (e) {
+        var next = (e.relatedTarget && e.relatedTarget.closest)
+          ? e.relatedTarget.closest('[data-cursor]') : null;
+        if (next && next !== el) { applyCursor(next); return; }
+        resetRing();
+      });
+    });
+
+    // I-beam over running text (skipped inside data-cursor zones)
+    document.querySelectorAll('p').forEach(function (p) {
+      if (p.closest('[data-cursor]')) return;
+      p.addEventListener('mouseenter', function () {
+        setState('text');
+        ringSize({ width: 2, height: 24, borderRadius: 0 });
+      });
+      p.addEventListener('mouseleave', resetRing);
+    });
+
+    // Dot magnetizes to the centre of interactive targets.
+    // No overwrite flag here: killing the quickTo tweens would break them
+    // permanently. The `releasing` guard is what prevents the fight.
+    document.querySelectorAll('[data-magnetic]').forEach(function (el) {
+      el.addEventListener('mouseenter', function () {
+        magnet = el;
+        releasing = false;
+        var r = el.getBoundingClientRect();
+        gsap.to(dot, {
+          x: r.left + r.width / 2, y: r.top + r.height / 2,
+          duration: 0.2, ease: 'power3.out'
+        });
+      });
+      // BUG C — ease back to the live pointer instead of snapping there
+      // on whatever the next mousemove happens to be.
+      el.addEventListener('mouseleave', function () {
+        magnet = null;
+        releasing = true;
+        gsap.to(dot, {
+          x: lastX, y: lastY, duration: 0.22, ease: 'power2.out',
+          onComplete: function () { releasing = false; }
+        });
+      });
+    });
+  }
+
+  /* --------------------------------------------------------
+     GALLERY HELPERS (shared by pinned + native modes)
+     -------------------------------------------------------- */
+  var strip = document.getElementById('hstrip');
+  var track = document.getElementById('htrack');
+  var fill = document.querySelector('#hprogress .fill');
+  var indexEl = document.getElementById('hindex');
+  var hint = document.getElementById('hhint');
+  var cards = gsap.utils.toArray('.gcard');
+
+  function pad(n) { return ('0' + n).slice(-2); }
+
+  function setActive() {
+    var mid = window.innerWidth / 2, best = 0, bestD = Infinity;
+    for (var i = 0; i < cards.length; i++) {
+      var r = cards[i].getBoundingClientRect();
+      var d = Math.abs(r.left + r.width / 2 - mid);
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    for (var j = 0; j < cards.length; j++) cards[j].classList.toggle('is-active', j === best);
+    indexEl.textContent = pad(best + 1) + ' / ' + pad(cards.length);
+  }
+
+  strip.addEventListener('scroll', function () {
+    if (strip.classList.contains('native')) setActive();
+  }, { passive: true });
+
+  /* --------------------------------------------------------
+     MOTION
+     -------------------------------------------------------- */
+  var mm = gsap.matchMedia();
+  var EASE = 'power3.out';
+
+  mm.add('(prefers-reduced-motion: no-preference)', function () {
+
+    /* ---- Hero load sequence, ~1.6s ----
+       fromTo throughout: these targets start hidden in CSS, so a plain .from()
+       would animate 0 -> 0. yPercent AND y are both pinned on the masked lines
+       so the tween cannot inherit a half-parsed percentage transform. */
+    var heroTl = gsap.timeline({ paused: true, defaults: { ease: EASE } })
+      .fromTo('[data-hero="1"]', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 })
+      .fromTo('[data-hero="2"] > span',
+              { yPercent: 125, y: 0 },
+              { yPercent: 0, y: 0, duration: 1.1, stagger: 0.08 }, '-=0.45')
+      .to('.portrait .mask', { yPercent: -100, duration: 1.4, ease: 'power3.inOut' }, '-=1.15')
+      .fromTo('.portrait-cap', { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.5')
+      .fromTo('[data-hero="3"]', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, '-=0.95')
+      .fromTo('.hero-links > *', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.06 }, '-=0.7')
+      .fromTo('[data-hero="5"]', { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.6')
+      .fromTo('#scrollcue', { opacity: 0 }, { opacity: 1, duration: 0.6 }, '-=0.4');
+
+    /* Sequence the blur-up ahead of the mask: the portrait resolves, its
+       800ms CSS de-blur runs, and the mask only lifts 1.15s into this
+       timeline. A cached image starts everything immediately, on the
+       original timing; 1.2s is the cap so a slow image never stalls the page. */
+    var portraitImg = document.querySelector('.portrait img');
+    if (!portraitImg || (portraitImg.complete && portraitImg.naturalWidth > 0)) {
+      heroTl.play();
+    } else {
+      var heroStarted = false;
+      var startHero = function () {
+        if (heroStarted) return;
+        heroStarted = true;
+        heroTl.play();
+      };
+      portraitImg.addEventListener('load', startHero, { once: true });
+      portraitImg.addEventListener('error', startHero, { once: true });
+      gsap.delayedCall(1.2, startHero);
+    }
+
+    /* ---- The page's only parallax. Retargeted from the <img> to the 3D
+       wrapper so the image element's transform stays owned by the CSS
+       load reveal and the two can never overwrite each other. ---- */
+    gsap.to('.portrait-3d', {
+      y: -40, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+
+    /* ---- U1a — portrait 3D tilt + cursor-tracking spotlight ---- */
+    if (CAN_HOVER) {
+      var portrait = document.querySelector('.portrait');
+      var p3d = document.querySelector('.portrait-3d');
+      var spot = document.querySelector('.portrait .spotlight');
+      if (portrait && p3d && spot) {
+        var prx = gsap.quickTo(p3d, 'rotationX', { duration: 0.6, ease: 'power3.out' });
+        var pry = gsap.quickTo(p3d, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+        var pInside = false, pRaf = 0, pSX = 0, pSY = 0;
+
+        var paintSpot = function () {
+          pRaf = 0;
+          spot.style.setProperty('--sx', pSX + 'px');
+          spot.style.setProperty('--sy', pSY + 'px');
+        };
+
+        portrait.addEventListener('mouseenter', function () {
+          pInside = true;
+          gsap.to(p3d, { scale: 1.02, duration: 0.6, ease: 'power3.out' });
+          gsap.to(spot, { opacity: 1, duration: 0.4, ease: 'power2.out' });
         });
 
-        // Sync Lenis with GSAP ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time)=>{
-            lenis.raf(time * 1000);
+        portrait.addEventListener('mousemove', function (e) {
+          if (!pInside) return;
+          var r = portrait.getBoundingClientRect();
+          var cx = r.left + r.width / 2;
+          var cy = r.top + r.height / 2;
+          prx(-((e.clientY - cy) / (r.height / 2)) * 6);
+          pry(((e.clientX - cx) / (r.width / 2)) * 6);
+          pSX = e.clientX - r.left;
+          pSY = e.clientY - r.top;
+          if (!pRaf) pRaf = requestAnimationFrame(paintSpot);
+        }, { passive: true });
+
+        // Settles back slower than it engages.
+        portrait.addEventListener('mouseleave', function () {
+          pInside = false;
+          gsap.to(p3d, { rotationX: 0, rotationY: 0, scale: 1, duration: 0.8, ease: 'power3.out' });
+          gsap.to(spot, { opacity: 0, duration: 0.4, ease: 'power2.out' });
         });
-        gsap.ticker.lagSmoothing(0);
+      }
+    }
 
-        // --- 3. Physics Cursor (quickSetter) ---
-        gsap.set("#custom-cursor", {xPercent: -50, yPercent: -50});
-        let xTo = gsap.quickTo("#custom-cursor", "x", {duration: 0.4, ease: "power3"}),
-            yTo = gsap.quickTo("#custom-cursor", "y", {duration: 0.4, ease: "power3"});
+    gsap.timeline({ repeat: -1, repeatDelay: 3, delay: 2.4 })
+      .to('#scrollcue svg', { y: 8, duration: 0.5, ease: 'power2.inOut' })
+      .to('#scrollcue svg', { y: 0, duration: 0.5, ease: 'power2.inOut' });
 
-        window.addEventListener("mousemove", e => {
-            xTo(e.clientX);
-            yTo(e.clientY);
+    gsap.to('#scrollcue', {
+      opacity: 0, duration: 0.4,
+      scrollTrigger: { trigger: '#hero', start: 'bottom 90%', toggleActions: 'play none none reverse' }
+    });
+
+    /* ---- Generic reveals ---- */
+    gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+      gsap.fromTo(el, { y: 24, opacity: 0 }, {
+        y: 0, opacity: 1, ease: EASE,
+        duration: parseFloat(el.getAttribute('data-dur')) || 1,
+        scrollTrigger: { trigger: el, start: 'top 85%' }
+      });
+    });
+
+    /* ---- Capability rows: hairline draw + tag stagger ---- */
+    gsap.utils.toArray('.caprow').forEach(function (row) {
+      gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 85%' } })
+        .to(row.querySelector('.draw'), { scaleX: 1, duration: 0.6, ease: EASE })
+        .from(row.querySelectorAll('.name, .tags'),
+              { y: 20, opacity: 0, duration: 0.7, stagger: 0.04, ease: EASE }, 0);
+    });
+
+    /* ---- Contact: paper to ink, then the giant CTA ---- */
+    var contact = document.getElementById('contact');
+    contact.style.background = 'transparent';
+
+    gsap.fromTo('#veil', { opacity: 0 }, {
+      opacity: 1, ease: 'none',
+      scrollTrigger: { trigger: contact, start: 'top bottom', end: 'top center', scrub: true }
+    });
+
+    gsap.fromTo('.cta .mline > span',
+      { yPercent: 125, y: 0 },
+      {
+        yPercent: 0, y: 0, duration: 1.1, ease: EASE, stagger: 0.1,
+        scrollTrigger: { trigger: contact, start: 'top 60%' }
+      });
+
+    gsap.from('.contact-top > *, .contact-col, .contact-bottom > *', {
+      y: 24, opacity: 0, duration: 0.9, ease: EASE, stagger: 0.06,
+      scrollTrigger: { trigger: contact, start: 'top 45%' }
+    });
+
+    ScrollTrigger.create({
+      trigger: contact, start: 'top 72px', end: 'bottom bottom',
+      onToggle: function (self) {
+        nav.classList.toggle('on-dark', self.isActive);
+        document.body.classList.toggle('on-dark', self.isActive);
+        // The pill stays a pill over the veil — only its tokens flip.
+        if (self.isActive) nav.classList.remove('blend');
+        navState();
+      }
+    });
+
+    return function () {
+      contact.style.background = '';
+      nav.classList.remove('on-dark');
+      document.body.classList.remove('on-dark');
+    };
+  });
+
+  /* --------------------------------------------------------
+     HORIZONTAL PIN — desktop, motion allowed
+     -------------------------------------------------------- */
+  mm.add('(prefers-reduced-motion: no-preference) and (min-width: 1024px)', function () {
+    strip.classList.remove('native');
+    strip.scrollLeft = 0;
+
+    /* ---- U1b — magnetic image sway + subtle card tilt.
+       Attached here, inside the pin branch, so it exists only in pinned
+       desktop mode; matchMedia tears it down again on the way out. ---- */
+    var cardCleanups = [];
+    if (CAN_HOVER) {
+      cards.forEach(function (card) {
+        var sway = card.querySelector('.img-sway');
+        if (!sway) return;
+
+        var stx = gsap.quickTo(sway, 'x', { duration: 0.5, ease: 'power3.out' });
+        var sty = gsap.quickTo(sway, 'y', { duration: 0.5, ease: 'power3.out' });
+        var cry = gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power3.out' });
+        var inside = false;
+
+        var onEnter = function () {
+          inside = true;
+          gsap.set(card, { transformPerspective: 1400 });
+          gsap.to(sway, { scale: 1.06, duration: 0.5, ease: 'power3.out' });
+        };
+        // The rect is read per-move, never cached: the pin slides these
+        // cards horizontally, so a cached rect would be stale instantly.
+        var onMove = function (e) {
+          if (!inside) return;
+          var r = card.getBoundingClientRect();
+          if (!r.width || !r.height) return;
+          var nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+          var ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+          stx(nx * 14);
+          sty(ny * 14);
+          cry(nx * 2);
+        };
+        var onLeave = function () {
+          inside = false;
+          gsap.to(sway, { x: 0, y: 0, scale: 1, duration: 0.7, ease: 'power3.out' });
+          gsap.to(card, { rotationY: 0, duration: 0.7, ease: 'power3.out' });
+        };
+
+        card.addEventListener('mouseenter', onEnter);
+        card.addEventListener('mousemove', onMove, { passive: true });
+        card.addEventListener('mouseleave', onLeave);
+        cardCleanups.push(function () {
+          card.removeEventListener('mouseenter', onEnter);
+          card.removeEventListener('mousemove', onMove);
+          card.removeEventListener('mouseleave', onLeave);
+          gsap.set(sway, { clearProps: 'transform' });
+          gsap.set(card, { clearProps: 'transform' });
         });
+      });
+    }
 
-        const cursor = document.getElementById('custom-cursor');
-        const interactives = document.querySelectorAll('.interactive');
-        interactives.forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-        });
+    var distance = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
+    var hintShown = false;
 
-        // --- 4. Magnetic Effect (GSAP) ---
-        const magnetics = document.querySelectorAll('.magnetic');
-        magnetics.forEach((btn) => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const h = rect.width / 2;
-                
-                const x = e.clientX - rect.left - h;
-                const y = e.clientY - rect.top - h;
+    gsap.to(track, {
+      x: function () { return -distance(); },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: strip,
+        start: 'top top',
+        end: function () { return '+=' + distance(); },
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onEnter: function () {
+          if (hintShown) return;
+          hintShown = true;
+          gsap.to(hint, { opacity: 1, duration: 0.4 });
+          gsap.to(hint, { opacity: 0, duration: 0.6, delay: 3 });
+        },
+        onUpdate: function (self) {
+          gsap.set(fill, { scaleX: self.progress });
+          setActive();
+        },
+        onRefresh: setActive
+      }
+    });
 
-                // Adjust magnetic pull radius (50px ish as requested)
-                const rx = x * 0.3;
-                const ry = y * 0.3;
+    setActive();
 
-                gsap.to(btn, {
-                    x: rx,
-                    y: ry,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
+    return function () {
+      cardCleanups.forEach(function (fn) { fn(); });
+      cardCleanups.length = 0;
+      strip.classList.add('native');
+      gsap.set(track, { clearProps: 'transform' });
+      gsap.set(fill, { scaleX: 0 });
+    };
+  });
 
-            btn.addEventListener('mouseleave', () => {
-                gsap.to(btn, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "elastic.out(1, 0.3)"
-                });
-            });
-        });
-
-        // --- 5. Kinetic Text (SplitType + GSAP) ---
-        // Setup SplitType for Kinetic Text
-        const kineticTexts = document.querySelectorAll('.kinetic-text');
-        kineticTexts.forEach(text => {
-            // Split into lines first, then wrap lines
-            const split = new SplitType(text, { types: 'lines, words' });
-            
-            // Wrap each line in a div with overflow-hidden for the reveal mask
-            split.lines.forEach(line => {
-                const wrapper = document.createElement('div');
-                wrapper.classList.add('line-mask');
-                wrapper.style.overflow = 'hidden';
-                line.parentNode.insertBefore(wrapper, line);
-                wrapper.appendChild(line);
-            });
-
-            // Animate reveal
-            gsap.from(split.words, {
-                yPercent: 100,
-                autoAlpha: 0,
-                duration: 1.2,
-                ease: 'power3.out',
-                stagger: 0.03,
-                scrollTrigger: {
-                    trigger: text,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-        // --- 6. Image Parallax (GSAP) ---
-        // Image Parallax zoom out from 1.2 to 1.0 (or opposite depending on scroll direction)
-        gsap.utils.toArray('.gs-parallax-img').forEach(function(img) {
-            gsap.to(img, {
-                scale: 1, // End scale
-                yPercent: 10, // Slight vertical movement opposite to scroll
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img.closest('.img-mask'),
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-        });
-
-        // --- General Reveals ---
-        gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
-            gsap.fromTo(elem, 
-                { y: 30, autoAlpha: 0 }, 
-                {
-                    duration: 1, 
-                    y: 0, 
-                    autoAlpha: 1, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Scroll Progress Bar
-        const scrollProgress = document.getElementById('scroll-progress');
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height);
-            scrollProgress.style.transform = `scaleX(${scrolled})`;
-        });
-
-        // Smooth Model Viewer Rotation (Lerp)
-        gsap.utils.toArray('model-viewer').forEach(function(model) {
-            ScrollTrigger.create({
-                trigger: model.closest('.project-scroll-section'),
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1, // Add 1 second smoothing/lerping
-                onUpdate: self => {
-                    const angle = self.progress * 360;
-                    model.setAttribute('camera-orbit', `${angle}deg 75deg auto`);
-                }
-            });
-        });
-
-        // Dynamic Nav
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('main-nav');
-            const navContainer = document.getElementById('nav-container');
-            const navLogo = document.getElementById('nav-logo');
-            const navLinks = document.getElementById('nav-links').querySelectorAll('a');
-            
-            if (window.scrollY > 20) {
-                nav.classList.remove('w-full');
-                nav.classList.add('top-4', 'left-1/2', '-translate-x-1/2', 'w-[90%]', 'max-w-4xl', 'rounded-full', 'bg-gray-200/90', 'backdrop-blur-md', 'shadow-lg');
-                navContainer.classList.remove('px-gutter', 'py-4', 'max-w-container-max');
-                navContainer.classList.add('px-8', 'py-2');
-                navLogo.classList.remove('text-on-primary');
-                navLogo.classList.add('text-primary');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-on-primary');
-                    link.classList.add('text-on-surface');
-                });
-            } else {
-                nav.classList.add('w-full');
-                nav.classList.remove('top-4', 'left-1/2', '-translate-x-1/2', 'w-[90%]', 'max-w-4xl', 'rounded-full', 'bg-gray-200/90', 'backdrop-blur-md', 'shadow-lg');
-                navContainer.classList.add('px-gutter', 'py-4', 'max-w-container-max');
-                navContainer.classList.remove('px-8', 'py-2');
-                navLogo.classList.add('text-on-primary');
-                navLogo.classList.remove('text-primary');
-                navLinks.forEach(link => {
-                    link.classList.add('text-on-primary');
-                    link.classList.remove('text-on-surface');
-                });
-            }
-        });
-
-        // Interactive Cyber Grid Toggle
-        const btnToggle = document.getElementById('toggle-grid');
-        const grid = document.getElementById('cyber-grid');
-        btnToggle.addEventListener('click', () => {
-            grid.classList.toggle('active');
-        });
-
-        // Terminal Interactive Setup
-        const terminalInput = document.getElementById('terminal-input');
-        const terminalContent = document.getElementById('terminal-content');
-        
-        terminalInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = this.value.trim();
-                if (cmd) {
-                    const echo = document.createElement('p');
-                    echo.innerHTML = `<span class="text-[#00FF66]">sabiq@ros2:~$</span> ${cmd}`;
-                    terminalContent.appendChild(echo);
-                    
-                    const response = document.createElement('p');
-                    if (cmd === 'help') {
-                        response.className = 'sys';
-                        response.innerHTML = 'Available commands: ros2 launch, status, clear, help';
-                    } else if (cmd === 'status') {
-                        response.className = 'cmd';
-                        response.innerHTML = 'System Status: All nodes active.<br/>[INFO] [slam_toolbox]: Node started<br/>[INFO] [nav2_controller]: Active';
-                    } else if (cmd.startsWith('ros2 launch')) {
-                        response.className = 'sys';
-                        response.innerHTML = `[INFO] [launch]: Default logging verbosity is set to INFO<br/>[INFO] [robot_state_publisher]: Starting...<br/>Waiting for odometry...`;
-                    } else if (cmd === 'clear') {
-                        terminalContent.innerHTML = '';
-                    } else {
-                        response.className = 'err';
-                        response.innerHTML = `Command '${cmd}' not found.`;
-                    }
-                    if (cmd !== 'clear') {
-                        terminalContent.appendChild(response);
-                    }
-                    
-                    this.value = '';
-                    terminalContent.scrollTop = terminalContent.scrollHeight;
-                }
-            }
-        });
-    </script>
-</body></html>
+  setActive();
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>
